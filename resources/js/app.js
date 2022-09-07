@@ -22,7 +22,16 @@ window.Vue = require('vue');
 Vue.component('Chat', require('./components/Chat.vue').default);
 
 Vue.component('Chat2', require('./components/Chat2.vue').default);
+
+Vue.component('Chat3', require('./components/MusicList.vue').default);
+
+Vue.component('Chat4', require('./components/MusicChat.vue/NewList').default);
+Vue.component('Chat5', require('./components/MusicChat.vue/TopList').default);
+
 Vue.component('List', require('./components/List.vue').default);
+
+
+
 // Vue.component('TestList', require('./components/TestList.vue').default);
 
 /**

@@ -36,4 +36,18 @@ class HomeController extends Controller
         return view('ListFile');
     }
 
+    public function MusicList()
+    {
+        return view('MusicList');
+    }
+
+    public function new()
+    {
+        return view('new');
+    }
+
+    public function top()
+    {
+        return view('top');
+    }
 }

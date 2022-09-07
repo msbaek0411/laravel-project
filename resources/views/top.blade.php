@@ -3,6 +3,6 @@
 @section('content')
 
 <div class="container">
-    <List/>
+    <Chat5/>
 </div>
 @endsection

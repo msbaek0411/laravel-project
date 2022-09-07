@@ -7,6 +7,16 @@
         >
             {{ user.name }}
         </div>
+        <!-- <div v-for="(k,i) in menu" :key="i">
+            {{menu}}
+        </div> -->
+        <!-- {{users[0].name}}
+        {{users[1].name}} -->
+
+        <div v-for="user in users" :key="user.id">
+            {{ user.name }}
+        </div>
+
     </div>
 </template>
 
@@ -14,7 +24,8 @@
     export default {
         data() {
             return {
-                users: []
+                users: [],
+                menu : ['Home: 423', 'Shop: 414', 'About: 4141'],
             }
         },
         created() {

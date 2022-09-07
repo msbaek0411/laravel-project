@@ -20,5 +20,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/TestList', 'HomeController@TestList')->name('TestList1');
+
 Route::get('/List', 'HomeController@List')->name('TestList2');
+
+Route::get('/TEST', function(){
+    return view('test');
+});
+
+Route::get('/MusicList', 'HomeController@MusicList');
+
+Route::get('/MusicList/new', 'HomeController@new');
+Route::get('/MusicList/top', 'HomeController@top');

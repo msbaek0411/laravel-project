@@ -1,17 +1,21 @@
 <template>
     <div class="flex h-full">
         {{List[0].id}}
-        test
+        <KakaoMap/>
     </div>
 </template>
 
 <script>
 import Axios from 'axios';
+import KakaoMap from './kakaoApi/KakaoMap.vue';
     export default {
         data() {
             return{
                 List : []
             }
+        },
+        components: {
+            KakaoMap
         },
         created() {
             Axios.get('api/List')
