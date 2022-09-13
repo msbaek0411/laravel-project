@@ -19,16 +19,17 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('Chat', require('./components/Chat.vue').default);
 
-Vue.component('Chat2', require('./components/Chat2.vue').default);
 
 Vue.component('Chat3', require('./components/MusicList.vue').default);
 
 Vue.component('Chat4', require('./components/MusicChat.vue/NewList').default);
+
 Vue.component('Chat5', require('./components/MusicChat.vue/TopList').default);
 
-Vue.component('List', require('./components/List.vue').default);
+Vue.component('Chat6', require('./components/MusicChat.vue/MainHome').default);
+
+
 
 
 

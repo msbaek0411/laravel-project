@@ -5,6 +5,7 @@
         <h1 class="text-4xl leading-loose">Top 100 playlist</h1>
         <table class="table-auto">
                 <!-- {{tests.data.trackList[0]}} -->
+                {{test}}
             <thead>
                 <tr>
                     <th>.no</th>
@@ -18,7 +19,7 @@
             </thead>
             <tbody>
                 <tr 
-                    v-for="(test, i) in tests.data.trackList" v-bind:key=i
+                    v-for="(test, i) in tests.data.trackList" :key= test
                     @click="handle_toggle(i)"
                 >
                     <td>{{i + 1}}</td>
@@ -35,7 +36,7 @@
         </table>
         <button @click="more">더보기</button>
 
-        <div v-show="is_show" class="test">
+         <div v-show="is_show" class="test">
                 <div class="w-full h-full">
                     <img :src=tests.data.trackList[this.id].album.imgList[2].url alt="" class="float-left pr-4">
                     <div>
@@ -48,19 +49,19 @@
                         <img src="../../../img/icon_arrow_left.png" alt="" class="float-left relative top-[355px] right-[90px]"
                         @click="preevent">
                         <img :src=tests.data.trackList[this.id].album.imgList[0].url alt="" class="float-left relative top-[332px] right-[90px]" style="border: solid 5px burlywood;">
-                        <img :src=tests.data.trackList[this.id+1].album.imgList[0].url alt="" class="float-left relative top-[336px] right-[80px]" @click="nextevent(1)">
-                        <img :src=tests.data.trackList[this.id+2].album.imgList[0].url alt="" class="float-left relative top-[336px] right-[70px]" @click="nextevent(2)">
-                        <img :src=tests.data.trackList[this.id+3].album.imgList[0].url alt="" class="float-left relative top-[336px] right-[60px]" @click="nextevent(3)">
-                        <img :src=tests.data.trackList[this.id+4].album.imgList[0].url alt="" class="float-left relative top-[336px] right-[50px]" @click="nextevent(4)">
+                        <img :src=tests.data.trackList[this.id+1].album.imgList[0].url alt="" class="float-left relative top-[336px] right-[80px]">
+                        <img :src=tests.data.trackList[this.id+2].album.imgList[0].url alt="" class="float-left relative top-[336px] right-[70px]">
+                        <img :src=tests.data.trackList[this.id+3].album.imgList[0].url alt="" class="float-left relative top-[336px] right-[60px]">
+                        <img :src=tests.data.trackList[this.id+4].album.imgList[0].url alt="" class="float-left relative top-[336px] right-[50px]">
                         <img src="../../../img/icon_arrow_right.png" alt="" class="float-left relative top-[355px] right-[40px]"
-                        @click="nextevent(1)">
+                        @click="nextevent">
                     </div>
                 </div>
-                <div class="test2">
-                    <button @click="submit" type="button" class="float-left relative top-[32px] right-[22px]">확인</button>
-                    <button @click="handle_cancel" type="button" class="float-left relative top-[32px] right-[0px]">취소</button>
+        <div class="test2">
+            <button @click="submit" type="button" class="float-left relative top-[32px] right-[22px]">확인</button>
+            <button @click="handle_cancel" type="button" class="float-left relative top-[32px] right-[0px]">취소</button>
 
-                </div>
+        </div>
     </div>
     </div>        
 </template>
@@ -116,39 +117,22 @@
                                 alert('추가 됐습니다.')
                                 Axios
                                      .post('/api/chatlists',{
-                                        // title: this.id,
-                                        // img: this.tests.data.trackList[this.id].album.imgList[0].url,
-                                        // // img: this.imgList,
-                                        // img2: this.id,
-                                        // artist: this.id,
-                                        // albumName: this.id,
-                                        // playlist: this.id,
-                                        // // update:this.test,
-                                        // createDate:'2022-09-09 11:08:37'
-                                        title: this.tests.data.trackList[this.id].album.title,
+                                        title: this.id,
                                         img: this.tests.data.trackList[this.id].album.imgList[0].url,
                                         // img: this.imgList,
-                                        img2: this.tests.data.trackList[this.id].album.imgList[2].url,
-                                        artist: this.tests.data.trackList[this.id].artistList[0].name,
-                                        albumName: this.tests.data.trackList[this.id].album.title,
+                                        img2: this.id,
+                                        artist: this.id,
+                                        albumName: this.id,
                                         playlist: this.id,
                                         // update:this.test,
                                         createDate:'2022-09-09 11:08:37'
                                      })
-
-
                                 },
-                    // nextevent: function(){
-                    //     this.id = this.id + 1
-                    // },
+                    nextevent: function(){
+                        this.id = this.id + 1
+                    },
                     preevent: function(){
                         this.id = this.id - 1
-                        if (this.id < 0){
-                            this.id = 0 
-                        }
-                    },
-                    nextevent(i) {
-                        this.id = this.id + i
                     }
                     }
     }

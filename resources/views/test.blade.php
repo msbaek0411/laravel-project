@@ -7,6 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    12
+    <form action="/foo">
+        <input type="text" name="num">
+        @csrf
+        <button>전송</button>
+    </form>
 </body>
 </html>

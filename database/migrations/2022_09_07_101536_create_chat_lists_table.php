@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTestZSTable extends Migration
+class CreateChatListsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,16 @@ class CreateTestZSTable extends Migration
      */
     public function up()
     {
-        Schema::create('test_z_s', function (Blueprint $table) {
+        Schema::create('chat_lists', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('to');
-            $table->string('text');
+            $table->string('img');
+            $table->string('img2');
+            $table->string('title');
+            $table->string('artist');
+            $table->string('albumName');
+            $table->date('createDate');
+            $table->time('playlist');
             $table->timestamps();
-            
         });
     }
 
@@ -29,6 +33,6 @@ class CreateTestZSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('test_z_s');
+        Schema::dropIfExists('chat_lists');
     }
 }

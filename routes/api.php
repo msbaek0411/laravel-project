@@ -18,12 +18,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('messages')->group(function(){
-   Route::post('/', 'MessageController@store');
-});
-
 Route::get('/users', 'UserController@index');
 
 Route::get('/test', 'TestZController@index');
 
 Route::get('List', 'ListFileController@index');
+
+Route::get('/chatlists', 'ChatListController@index');
+
+
+Route::post('/chatlists', 'ChatListController@store');
+
+
+
+
+// Route::prefix('ChatList')->group(function(){
+//     Route::post('/top', 'ChatListController@store');
+//  });
