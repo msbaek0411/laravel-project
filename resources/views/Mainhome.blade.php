@@ -4,6 +4,6 @@
 
 <div class="container">
     
-    <Chat6></Chat6>
+    <Chat6 :current-user="{{ auth()->id() }}"></Chat6>
 </div>
 @endsection

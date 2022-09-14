@@ -1914,6 +1914,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    currentUser: {
+      type: Number,
+      required: true
+    }
+  },
   components: {
     layout: _layout_layout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -1941,7 +1947,12 @@ __webpack_require__.r(__webpack_exports__);
     countup: function countup(i) {
       this.id = i;
     },
-    idDelete: function idDelete() {}
+    deleteList: function deleteList(i) {
+      alert('삭제 됐습니다.');
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("http://127.0.0.1:8000/api/chatlists/".concat(i + 1)).then(function (res) {
+        window.location.reload();
+      });
+    }
   }
 });
 
@@ -2008,6 +2019,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    currentUser: {
+      type: Number,
+      required: true
+    }
+  },
   components: {
     layout: _layout_layout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -2057,15 +2074,8 @@ __webpack_require__.r(__webpack_exports__);
 
       alert('추가 됐습니다.');
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/chatlists', {
-        // title: this.id,
-        // img: this.tests.data.trackList[this.id].album.imgList[0].url,
-        // // img: this.imgList,
-        // img2: this.id,
-        // artist: this.id,
-        // albumName: this.id,
-        // playlist: this.id,
-        // // update:this.test,
-        // createDate:'2022-09-09 11:08:37'
+        userid: this.currentUser,
+        index: this.id,
         title: this.tests.data.trackList[this.id].album.title,
         img: this.tests.data.trackList[this.id].album.imgList[0].url,
         // img: this.imgList,
@@ -2157,7 +2167,7 @@ var render = function render() {
     staticClass: "h-full"
   }, [_c("layout"), _vm._v(" "), _c("h1", {
     staticClass: "text-4xl leading-loose"
-  }, [_vm._v("나의 playlist ")]), _vm._v(" "), _c("table", {
+  }, [_vm._v("나의 playlist " + _vm._s(_vm.Main) + " ")]), _vm._v(" "), _c("table", {
     staticClass: "table-auto"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.Main.ChatList, function (test, i) {
     return _c("tr", {
@@ -2218,7 +2228,9 @@ var render = function render() {
       }
     }, [_vm._v(_vm._s(_vm.Main.ChatList[i].playlist))]), _vm._v(" "), _c("td", {
       on: {
-        click: _vm.idDelete
+        click: function click($event) {
+          return _vm.deleteList(i);
+        }
       }
     }, [_vm._v("삭제")])]);
   }), 0), _vm._v(" "), _c("div")]), _vm._v(" "), _c("div", {

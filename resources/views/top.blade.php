@@ -3,6 +3,6 @@
 @section('content')
 
 <div class="container">
-    <Chat5/>
+    <Chat5 :current-user="{{ auth()->id() }}"></Chat5>
 </div>
 @endsection

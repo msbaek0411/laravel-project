@@ -29,7 +29,7 @@ Route::get('/chatlists', 'ChatListController@index');
 
 Route::post('/chatlists', 'ChatListController@store');
 
-
+Route::delete('/chatlists/{index}', 'ChatListController@destory');
 
 
 // Route::prefix('ChatList')->group(function(){

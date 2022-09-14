@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use App\ChatList;
+
+// json data
 use Illuminate\Http\Request;
+
 
 class ChatListController extends Controller
 {
@@ -15,8 +19,10 @@ class ChatListController extends Controller
         ],200);
     }
 
-    public function store(Request $request) {
+    public function store() {
         $validated = request()->validate([
+            'userid' => 'required',
+            'index' => 'required',
             'title' => 'required',
             'img' =>  'required',
             'img2' =>  'required',
@@ -29,8 +35,22 @@ class ChatListController extends Controller
 
         $ChatList = ChatList::create($validated);
 
+        return response()->json([
+            'ChatList' => $ChatList
+        ], 201);
+
     }
 
+    public function destory($i)
+    {
+        // data 생성 
+        // $ChatList = ChatList::find($i);
+        // $ChatList->delete();
+        ChatList::where('index', $i)->delete();
+              
+        
+    }
+      
 
 
 }

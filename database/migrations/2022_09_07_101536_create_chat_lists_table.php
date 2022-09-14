@@ -15,6 +15,8 @@ class CreateChatListsTable extends Migration
     {
         Schema::create('chat_lists', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('userId');
+            $table->string('index');
             $table->string('img');
             $table->string('img2');
             $table->string('title');
@@ -23,6 +25,8 @@ class CreateChatListsTable extends Migration
             $table->date('createDate');
             $table->time('playlist');
             $table->timestamps();
+
+            $table->foreign('userId')->references('id')->on('users');
         });
     }
 

@@ -2,7 +2,7 @@
 
     <div class="h-full">
         <layout/>
-        <h1 class="text-4xl leading-loose">나의 playlist </h1>
+        <h1 class="text-4xl leading-loose">나의 playlist {{Main}} </h1>
 
         <table class="table-auto">
             <thead>
@@ -28,7 +28,7 @@
                         <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].albumName}}</td>
                         <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].createDate}}</td>
                         <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].playlist}}</td>
-                        <td @click="idDelete">삭제</td>
+                        <td @click="deleteList(i)">삭제</td>
                     </tr>
                         
 
@@ -80,6 +80,12 @@
         import layout from '../layout/layout.vue'
 
         export default {
+            props: {
+                currentUser : {
+                    type: Number,
+                    required: true
+                }
+            },
             components: {
                 layout
             },
@@ -103,8 +109,12 @@
                         countup(i) {
                             this.id  =  i
                         },
-                        idDelete() {
-
+                        deleteList(i) {
+                            alert('삭제 됐습니다.')
+                            Axios.delete(`http://127.0.0.1:8000/api/chatlists/${i+1}`)
+                            .then(res => {
+                                window.location.reload();
+                            });
                         }
                     }
         }

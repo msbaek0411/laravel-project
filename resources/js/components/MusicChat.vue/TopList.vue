@@ -3,6 +3,7 @@
     <div class="h-full">
         <layout/>
         <h1 class="text-4xl leading-loose">Top 100 playlist</h1>
+
         <table class="table-auto">
                 <!-- {{tests.data.trackList[0]}} -->
             <thead>
@@ -70,6 +71,12 @@
     import layout from '../layout/layout.vue'
 
     export default {
+        props: {
+                currentUser: {
+                    type: Number,
+                    required: true
+                }
+            },
         components: {
                 layout
                 
@@ -115,16 +122,9 @@
                                 this.is_show = !this.is_show; // #2, #3
                                 alert('추가 됐습니다.')
                                 Axios
-                                     .post('/api/chatlists',{
-                                        // title: this.id,
-                                        // img: this.tests.data.trackList[this.id].album.imgList[0].url,
-                                        // // img: this.imgList,
-                                        // img2: this.id,
-                                        // artist: this.id,
-                                        // albumName: this.id,
-                                        // playlist: this.id,
-                                        // // update:this.test,
-                                        // createDate:'2022-09-09 11:08:37'
+                                     .post('/api/chatlists', {
+                                        userid:this.currentUser,
+                                        index:this.id,
                                         title: this.tests.data.trackList[this.id].album.title,
                                         img: this.tests.data.trackList[this.id].album.imgList[0].url,
                                         // img: this.imgList,
