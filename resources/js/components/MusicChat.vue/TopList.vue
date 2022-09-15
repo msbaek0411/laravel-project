@@ -2,35 +2,44 @@
 
     <div class="h-full">
         <layout/>
-        <h1 class="text-4xl leading-loose">Top 100 playlist</h1>
+        <h1 class="text-4xl leading-loose">Top 100 playlist {{id}}</h1>
 
         <table class="table-auto">
                 <!-- {{tests.data.trackList[0]}} -->
             <thead>
-                <tr>
+                <tr class="css-tr">
                     <th>.no</th>
-                    <th>타이틀</th>
-                    <th>제목</th>
+                    <th>곡/앨범</th>
                     <th>아티스트</th>
-                    <th>앨범이름</th>
                     <th>발행날짜</th>
-                    <th>플레이리스트</th>
+                    <th>추가 정보</th>
                 </tr>
             </thead>
             <tbody>
                 <tr 
                     v-for="(test, i) in tests.data.trackList" v-bind:key=i
-                    @click="handle_toggle(i)"
+                    
                 >
                     <td>{{i + 1}}</td>
-                    <td><img :src=tests.data.trackList[i].album.imgList[0].url alt=""></td>
-                    <td>{{tests.data.trackList[i].name}}</td>
-                    <td>{{tests.data.trackList[i].artistList[0].name}}</td>
-                    <td>{{tests.data.trackList[i].album.title}}</td>
+                    <td class="info">
+                        <div class="info_wrap">
+                            <div class="info_img"><img :src=tests.data.trackList[i].album.imgList[0].url alt=""></div>
+                            <div class="text_area">
+                                <div class="titplay">{{tests.data.trackList[i].name}}</div>
+                                <div class="desc">{{tests.data.trackList[i].album.title}}</div>
+                            </div>
+
+                        </div>
+                        
+                    </td>
+                    <td class="artist">{{tests.data.trackList[i].artistList[0].name}}</td>
+
                     <td>{{tests.data.trackList[i].fileUpdateDateTime}}</td>
-                    <button>상세 정보 보기</button>
-                    <br>
-                    <button>저장하기</button>
+                    <td>
+                        <button @click="handle_toggle(i)">정보보기</button>
+                        <br>
+                    </td>
+                    
                 </tr>
             </tbody>
         </table>
@@ -58,7 +67,7 @@
                     </div>
                 </div>
                 <div class="test2">
-                    <button @click="submit" type="button" class="float-left relative top-[32px] right-[22px]">확인</button>
+                    <button @click="submit" type="button" class="float-left relative top-[32px] right-[22px]">마이 페이지에 저장하기</button>
                     <button @click="handle_cancel" type="button" class="float-left relative top-[32px] right-[0px]">취소</button>
 
                 </div>
@@ -135,12 +144,7 @@
                                         // update:this.test,
                                         createDate:'2022-09-09 11:08:37'
                                      })
-
-
                                 },
-                    // nextevent: function(){
-                    //     this.id = this.id + 1
-                    // },
                     preevent: function(){
                         this.id = this.id - 1
                         if (this.id < 0){
@@ -154,5 +158,71 @@
     }
 </script>
 
-            <style>
-            </style>
+<style>
+.css-tr {
+    height: 39px;
+    font-size: 13px;
+    color: #a0a0a0;
+    font-weight: 400;
+    border-top: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+    text-align: center;
+}
+
+td {
+    position: relative;
+    height: 84px;
+    text-align: center;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+
+.info > .info_wrap {
+    position: relative;
+    min-width: 210px;
+    max-width: 520px;
+    height: 60px;
+    padding-right: 28px;
+    padding-left: 80px;
+}
+
+
+
+.info > .info_wrap > .info_img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+}
+
+.info > .info_wrap > .text_area {
+    max-width: 280px;
+    text-align: left;
+}
+
+.titplay {
+    font-size: 24px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.info > .info_wrap > .text_are > .desc {
+    color: gray;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.artist {
+    text-align: left;
+    padding-left: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+
+</style>

@@ -15,12 +15,12 @@
 
     @extends('layouts.app')
 
-    @section('content')
+@section('content')
 
-    <div class="container">
-        <Chat4/>
-    </div>
-    @endsection
+<div class="container">
+    <Chat4/>
+</div>
+@endsection
 
     </body>
 </html>

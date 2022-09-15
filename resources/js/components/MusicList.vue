@@ -4,7 +4,7 @@
         <layout/>
         
         <br>
-        <!-- <NewList/> -->
+        
     </div>        
 </template>
 

@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="container">
-    <Chat></Chat>
+    123
 </div>
 @endsection

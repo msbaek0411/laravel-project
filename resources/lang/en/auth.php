@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
+    'failed' => 'e-mail 또는 password를 확인해주세요',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
 ];

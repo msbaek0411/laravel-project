@@ -12,7 +12,11 @@ use Illuminate\Http\Request;
 class ChatListController extends Controller
 {
     public function index() {
-        $ChatList = ChatList::all();
+        // $ChatList = ChatList::all();
+
+        $ChatList = ChatList::where(function($query) {
+            $query->where('userid', request('userid'));
+        })->latest()->get();
 
         return response()->json([
             'ChatList' => $ChatList
@@ -49,6 +53,15 @@ class ChatListController extends Controller
         ChatList::where('index', $i)->delete();
               
         
+    }
+
+    public function alldata()
+    {
+        $ChatList = ChatList::all();
+
+        return response()->json([
+            'ChatList' => $ChatList
+        ],200);
     }
       
 

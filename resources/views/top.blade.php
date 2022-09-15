@@ -1,8 +1,25 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-@section('content')
+        <title>Laravel</title>
 
-<div class="container">
-    <Chat5 :current-user="{{ auth()->id() }}"></Chat5>
-</div>
-@endsection
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
+
+        <!-- Styles -->
+    </head>
+    <body>
+        @extends('layouts.app')
+
+        @section('content')
+
+        <div class="container">
+            <Chat5 :current-user="{{ auth()->id() }}"></Chat5>
+        </div>
+        @endsection
+
+    </body>
+</html>

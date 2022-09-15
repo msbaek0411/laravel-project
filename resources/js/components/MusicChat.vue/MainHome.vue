@@ -2,9 +2,17 @@
 
     <div class="h-full">
         <layout/>
-        <h1 class="text-4xl leading-loose">나의 playlist {{Main}} </h1>
+        <h1 class="text-4xl leading-loose">나의 playlist</h1>
 
-        <table class="table-auto">
+
+        <div v-if="Main.ChatList[1] == null ">
+            <div>
+                정보없ㅇ므 <a href="http://127.0.0.1:8000/MusicList/top">탑</a>이나<a href="http://127.0.0.1:8000/MusicList/new">뉴</a>에 가서 데이터 쌓고 돌아와라.
+            </div>
+        </div>
+        <div v-else>
+            <button @click="alldatas()">전체데이타</button>
+            <table class="table-auto">
             <thead>
                 <tr>
                     <th>.no</th>
@@ -18,28 +26,21 @@
                 </tr>
             </thead>
             <tbody>
-                <tr 
-                v-for="(test, i) in Main.ChatList" :key= i>
-
-                        <td @click="[handle_toggle(),countup(i)]">{{i + 1}}</td>
-                        <td @click="[handle_toggle(),countup(i)]"><img :src="Main.ChatList[i].img" alt="NewListImg"></td>
-                        <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].title}}</td>
-                        <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].artist}}</td>
-                        <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].albumName}}</td>
-                        <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].createDate}}</td>
-                        <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].playlist}}</td>
-                        <td @click="deleteList(i)">삭제</td>
-                    </tr>
-                        
-
-
-                </tbody>
-                <!-- <button @click="countup">123</button> -->
-                <div >
-                    <!-- {{Main.ChatList[datas].title}} -->
-                </div>
-
-            </table>
+                <tr v-for="(test, i) in Main.ChatList" :key= i>
+                    <td @click="[handle_toggle(),countup(i)]">{{i + 1}}</td>
+                    <td @click="[handle_toggle(),countup(i)]"><img :src="Main.ChatList[i].img" alt="NewListImg"></td>
+                    <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].title}}</td>
+                    <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].artist}}</td>
+                    <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].albumName}}</td>
+                    <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].createDate}}</td>
+                    <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].playlist}}</td>
+                    <td @click="deleteList(i)">삭제</td>
+                </tr>
+            </tbody>
+        </table>
+            
+            
+            
     <!-- Modal  -->
     <div v-show="is_show" class="test">
                 <div class="w-full h-full">
@@ -71,6 +72,8 @@
 
     </div>
     </div>
+        </div>
+
         
         
     </template>
@@ -81,6 +84,7 @@
 
         export default {
             props: {
+                // users id
                 currentUser : {
                     type: Number,
                     required: true
@@ -91,16 +95,24 @@
             },
             data() {
                 return {tests: [],
+
+                    // db
                         Main: [],
                         is_show: false ,
                         id: '1',
+                        alldata: []
                         }
             },
             created() {
                 Axios
-                    .get('http://127.0.0.1:8000/api/chatlists')
+                    .get('http://127.0.0.1:8000/api/chatlists', {
+                        params: {
+                        userid: this.currentUser,
+                    }
+                    })
                     .then(res=>{this.Main = res.data}) 
                     .catch(error => {console.log(error)});
+                    
             },
             methods:{
                         handle_toggle: function(){ 
@@ -115,6 +127,11 @@
                             .then(res => {
                                 window.location.reload();
                             });
+                        },
+                        alldatas() {
+                            Axios.get('http://127.0.0.1:8000/api/chatlists/all')
+                            .then(res=>{this.alldata = res.data})
+                            .then(this.Main = this.alldata)
                         }
                     }
         }
@@ -130,6 +147,8 @@
     background: white;
     top: 15%;
     left: 28%;
+    position: fixed;
+    border-radius: 38px;
         }
         .test2{
             position: absolute;
