@@ -25,13 +25,11 @@ Route::get('/test', 'TestZController@index');
 Route::get('List', 'ListFileController@index');
 
 Route::get('/chatlists', 'ChatListController@index');
-
 Route::get('/chatlists/all', 'ChatListController@alldata');
-
-
 Route::post('/chatlists', 'ChatListController@store');
-
 Route::delete('/chatlists/{index}', 'ChatListController@destory');
+
+Route::get('/issue', 'IssueController@index');
 
 
 // Route::prefix('ChatList')->group(function(){

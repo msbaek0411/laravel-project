@@ -2,16 +2,11 @@
 
     <div class="h-full">
         <div>
-        <a 
-            class="border-solid border-2 border-indigo-600 rounded-2xl p-2 hover:bg-sky-700"
-            href="/MusicList/top"
-        >TOP100</a>
-        <a 
-            class="border-solid border-2 border-indigo-600 rounded-2xl p-2 hover:bg-sky-700"
-            href="/MusicList/new"
-            >NEW</a>
-        <a class="border-solid border-2 border-indigo-600 rounded-2xl p-2 hover:bg-sky-700" href="/MusicList/MainHome">Mainhome</a>
-        <a class="border-solid border-2 border-indigo-600 rounded-2xl p-2 hover:bg-sky-700">test</a>
+
+        <a class="btn btn-outline btn-accent" href="/MusicList/top">TOP100</a>
+        <a class="btn btn-outline btn-accent" href="/MusicList/new">NEW</a>
+        <a class="btn btn-outline btn-accent" href="/MusicList/MainHome">Mainhome</a>
+        <a class="btn btn-outline btn-accent">test</a>
        </div>
 
     </div>

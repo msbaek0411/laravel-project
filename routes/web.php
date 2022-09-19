@@ -20,7 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 
-
+Route::get('/admin', function () {
+    return view('AdminPage');
+});
 
 
 Route::get('/MusicList/MainHome', function () {

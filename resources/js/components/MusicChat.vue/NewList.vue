@@ -1,7 +1,12 @@
 <template>
 
     <div class="h-full">
-        <layout/>
+
+        <a class="btn btn-outline btn-accent" href="/MusicList/top">TOP100</a>
+        <a class="btn btn-active btn-accent" href="/MusicList/new">NEW</a>
+        <a class="btn btn-outline btn-accent" href="/MusicList/MainHome">Mainhome</a>
+        <a class="btn btn-outline btn-accent">test</a>
+        
         <h1 class="text-4xl leading-loose">NEW 100 playlist</h1>
 
 
@@ -20,7 +25,7 @@
             <tbody>
                 <tr v-for="(test, i) in tests.data.list" :key= test>
                     <td>{{i + 1}}</td>
-                    <td><img :src="tests.data.list[i].album.imgList[0].url" alt="NewListImg"></td>
+                    <td><img :src="tests.data.list[i].album.imgList[0].url" alt="NewListImg" class="w-3/12"></td>
                     <td>{{tests.data.list[i].name }}</td>
                     <td>{{tests.data.list[i].artistList[0].name}}</td>
                     <td>{{tests.data.list[i].album.title }}</td>

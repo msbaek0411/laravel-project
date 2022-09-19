@@ -29,6 +29,10 @@ Vue.component('Chat5', require('./components/MusicChat.vue/TopList').default);
 
 Vue.component('Chat6', require('./components/MusicChat.vue/MainHome').default);
 
+Vue.component('Chat7', require('./components/MusicChat.vue/MainPageC').default);
+
+Vue.component('Chat8', require('./components/MusicChat.vue/AdminPage').default);
+
 
 
 

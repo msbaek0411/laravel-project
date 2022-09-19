@@ -18,7 +18,7 @@
 @section('content')
 
 <div class="container">
-    <Chat7/>
+    <Chat8/>
 </div>
 @endsection
 

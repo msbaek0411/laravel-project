@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'MuLi') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -18,15 +18,19 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- tailwindcss -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <!-- dailyui -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.27.0/dist/full.css" rel="stylesheet" type="text/css" />
+    
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand" href="{{ url('/') }}" style="font-size: 35px;">
+                    MuLi
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -34,9 +38,23 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        <a href="/MusicList/top">MusicList</a>
-                    </ul>
+                    <div class="pr-3 text-[20px] pl-5">
+                        <a href="/MusicList/top" class="hover:text-[#008d8d]">top</a>
+                    </div>
+                    <div class="pr-3 text-[20px]">
+                        <a href="/MusicList/new" class="hover:text-[#008d8d]">new</a>
+                    </div>
+                    <div class="pr-3 text-[20px]">
+                        <a href="/MusicList/MainHome" class="hover:text-[#008d8d]">MainHome</a>
+                    </div>
+                    <div class="pr-3 text-[20px]">
+                    <a href="#" class="hover:text-[#008d8d]">test</a>
+                    </div>    
+                    
+                    
+        
+       
+      
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -78,5 +96,11 @@
             @yield('content')
         </main>
     </div>
+    <style>
+        a:hover {
+  text-decoration: none;
+}
+    </style>
+
 </body>
 </html>

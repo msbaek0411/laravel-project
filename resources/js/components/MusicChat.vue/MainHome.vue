@@ -1,7 +1,10 @@
 <template>
 
     <div class="h-full">
-        <layout/>
+        <a class="btn btn-outline btn-accent" href="/MusicList/top">TOP100</a>
+        <a class="btn btn-outline btn-accent" href="/MusicList/new">NEW</a>
+        <a class="btn btn-active btn-accent" href="/MusicList/MainHome">Mainhome</a>
+        <a class="btn btn-outline btn-accent">test</a>
         <h1 class="text-4xl leading-loose">나의 playlist</h1>
 
 
@@ -81,6 +84,8 @@
     <script>
         import Axios from 'axios';
         import layout from '../layout/layout.vue'
+        import Vue from 'vue';
+        import VueCarousel from 'vue-carousel'
 
         export default {
             props: {
@@ -140,7 +145,7 @@
     <style>
         .test{
             border: 1px solid darkgray;
-    padding: 3%;
+    padding: 2%;
     width: 41%;
     height: 66%;
     position: absolute;
@@ -156,5 +161,7 @@
             left: center;
             left: 50%;
         }
-    
+    li{
+        list-style:none;
+     }
     </style>

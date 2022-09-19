@@ -1,11 +1,18 @@
 <template>
 
-    <div class="h-full">
-        <layout/>
-        <h1 class="text-4xl leading-loose">Top 100 playlist {{id}}</h1>
+    <div class="">
+        
+        <a class="btn btn-active btn-accent color-white" href="/MusicList/top">TOP100</a>
+        <a class="btn btn-outline btn-accent" href="/MusicList/new">NEW</a>
+        <a class="btn btn-outline btn-accent" href="/MusicList/MainHome">Mainhome</a>
+        <a class="btn btn-outline btn-accent">test</a>
 
-        <table class="table-auto">
-                <!-- {{tests.data.trackList[0]}} -->
+        <h1 class="text-4xl leading-loose">Top 100 playlist</h1>
+        <div>
+            <input v-on:keyup="filter" type="text" id="value" placeholder="Type to Search" class="ml-[85%]">
+        </div>
+        
+        <table class="table-auto w-full">
             <thead>
                 <tr class="css-tr">
                     <th>.no</th>
@@ -16,45 +23,60 @@
                 </tr>
             </thead>
             <tbody>
-                <tr 
-                    v-for="(test, i) in tests.data.trackList" v-bind:key=i
-                    
-                >
+                <tr v-for="(test, i) in tests.data.trackList" v-bind:key=i class="itemtr">
                     <td>{{i + 1}}</td>
                     <td class="info">
                         <div class="info_wrap">
                             <div class="info_img"><img :src=tests.data.trackList[i].album.imgList[0].url alt=""></div>
                             <div class="text_area">
-                                <div class="titplay">{{tests.data.trackList[i].name}}</div>
-                                <div class="desc">{{tests.data.trackList[i].album.title}}</div>
+                                <div class="item">
+                                    <div class="titplay name">{{tests.data.trackList[i].name}}</div>
+                                    <div class="desc name">{{tests.data.trackList[i].album.title}}</div>
+                                </div>
                             </div>
-
                         </div>
-                        
                     </td>
                     <td class="artist">{{tests.data.trackList[i].artistList[0].name}}</td>
 
                     <td>{{tests.data.trackList[i].fileUpdateDateTime}}</td>
                     <td>
-                        <button @click="handle_toggle(i)">정보보기</button>
-                        <br>
+                            <button @click="handle_toggle(i)">정보보기</button>
+                            <br>
                     </td>
                     
                 </tr>
             </tbody>
         </table>
-        <button @click="more">더보기</button>
+        <div v-show="toggle">
+            <button @click="more" class="ml-[50%] btn btn-outline btn-accent">더보기</button>
+        </div>
+       
 
         <div v-show="is_show" class="test">
                 <div class="w-full h-full">
-                    <img :src=tests.data.trackList[this.id].album.imgList[2].url alt="" class="float-left pr-4">
                     <div>
-                        <li>{{tests.data.trackList[this.id].fileUpdateDateTime}}</li>
-                        <li>{{tests.data.trackList[this.id].name}}</li>
-                        <li>{{tests.data.trackList[this.id].artistList[0].name}}</li>
-                        <li>{{tests.data.trackList[this.id].album.title}}</li>
+                        
                     </div>
-                    <div class="">
+                    <img :src=tests.data.trackList[this.id].album.imgList[2].url alt="" class="float-left pr-4">
+                    <div class="mb-[13%]">
+                        <li class="text-[32px]">{{tests.data.trackList[this.id].name}}</li>
+                        <li> {{tests.data.trackList[this.id].artistList[0].name}}</li>
+                        <br>
+                        <li>
+                            <div class="float-left text-[13px] mr-[21px] ">발매일</div>
+                            <div class="text-[13px]">{{tests.data.trackList[this.id].fileUpdateDateTime}}</div>
+                        </li>
+                        <li>
+                            <div class="float-left text-[13px] mr-[8px] ">타이틀명</div>
+                            <div class="text-[13px]">{{tests.data.trackList[this.id].album.title}}</div>
+                        </li>
+                    </div>
+                    <div>
+                        <li>
+                            <div class="float-left">수렵곡</div>
+                        </li>
+                    </div>
+                    <!-- <div class="">
                         <img src="../../../img/icon_arrow_left.png" alt="" class="float-left relative top-[355px] right-[90px]"
                         @click="preevent">
                         <img :src=tests.data.trackList[this.id].album.imgList[0].url alt="" class="float-left relative top-[332px] right-[90px]" style="border: solid 5px burlywood;">
@@ -65,13 +87,15 @@
                         <img src="../../../img/icon_arrow_right.png" alt="" class="float-left relative top-[355px] right-[40px]"
                         @click="nextevent(1)">
                     </div>
+                     -->
                 </div>
+                
                 <div class="test2">
                     <button @click="submit" type="button" class="float-left relative top-[32px] right-[22px]">마이 페이지에 저장하기</button>
                     <button @click="handle_cancel" type="button" class="float-left relative top-[32px] right-[0px]">취소</button>
 
                 </div>
-    </div>
+        </div>
     </div>        
 </template>
 
@@ -83,7 +107,8 @@
         props: {
                 currentUser: {
                     type: Number,
-                    required: true
+                    required: true,
+                    
                 }
             },
         components: {
@@ -96,7 +121,8 @@
                     is_show: false,
                     id: '1',
                     imgList: [{ 'name' : 1, 'name2' : 2} ,{'name' : 2, 'name2' : 2}],
-                    imglistnum : '1'
+                    imglistnum : '1',
+                    toggle: true,
                     }
         },
         created() {
@@ -115,18 +141,37 @@
                     more(){
                         Axios
                             .get('https://www.music-flo.com/api/display/v1/browser/chart/1/track/list?size=100')
-                            .then(res => {
-                                    this.tests = res.data
-                                })
+                            .then(res => { this.tests = res.data}
+                            )
+                            this.toggle = !this.toggle
                     },
                     handle_toggle: function(i){ 
                                 this.is_show = !this.is_show; // #2, #3
-                                    this.id = i
+                                this.id = i
                                 },
-
+                                
                     handle_cancel: function(){
                                 this.is_show = !this.is_show;
                     },
+                    filter: function(){
+                        var value, name, item, i, itemtr;
+                            value = document.getElementById("value").value.toUpperCase();
+                            item = document.getElementsByClassName("item");
+                            itemtr = document.getElementsByClassName("itemtr");
+                            
+                            for(i=0;i<itemtr.length;i++){
+                                name = item[i].getElementsByClassName("name");
+                                if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+                                itemtr[i].style.display = "table-row";
+                                }else{
+                                itemtr[i].style.display = "none";
+                                // item[i].style.display = "none";
+                                 
+                                }
+
+                            }
+                    },
+
                     submit: function(){ 
                                 this.is_show = !this.is_show; // #2, #3
                                 alert('추가 됐습니다.')
@@ -153,8 +198,9 @@
                     },
                     nextevent(i) {
                         this.id = this.id + i
-                    }
-                    }
+                    },
+                
+                }
     }
 </script>
 
