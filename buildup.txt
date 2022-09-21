@@ -26,3 +26,6 @@ class="hover:text-[#008d8d]"
 3. 지금 이슈 컨텐츠 >> 인기 발매 음악 >> 내 음악 >> 오늘 발매 음악 db잇는 정보 ui 상으로 추가 // 완료
 
 4. 내일까지 무족건 처리하도록
+
+
+https://www.music-flo.com/api/meta/v1/album/${i}/track

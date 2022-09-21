@@ -187,13 +187,39 @@
         <!-- Topmodal -->
         <div v-show="is_showTop" class="test">
                 <div class="w-full h-full">
-                    <img :src=TopList.data.trackList[this.idTop].album.imgList[2].url alt="" class="float-left pr-4">
+                    <img :src=TopList.data.trackList[this.idTop].album.imgList[2].url alt="" class="float-left pr-4 pb-[33px]" >
                     <div>
                         <li>{{TopList.data.trackList[this.idTop].fileUpdateDateTime}}</li>
                         <li>{{TopList.data.trackList[this.idTop].name}}</li>
                         <li>{{TopList.data.trackList[this.idTop].artistList[0].name}}</li>
                         <li>{{TopList.data.trackList[this.idTop].album.title}}</li>
                     </div>
+
+                    <table class="table-auto w-full modallist">
+                        <thead class="w-full table">
+                            <tr class="css-tr">
+                                <th>.no</th>
+                                <th>곡/앨범</th>
+                            </tr>
+                        </thead>
+                        <tbody class="w-full table">
+                            <tr v-for="(test, i) in songs" v-bind:key=i style="clear: both;" class="itemtr">
+                                <td style="height: 34px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{i + 1}}</td>
+                                <td class="" style="height: 34px;">
+                                    <div class=""  style="height: -1px;">
+                                        <!-- <div class="info_img"><img :src=tests.data.trackList[i].album.imgList[0].url alt=""></div> -->
+                                        <div class="text_area">
+                                            <div class="item">
+                                                <li>{{songs[i].name}}</li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    
                 </div>
                 <div class="test2">
                     <button @click="handle_cancelTop()" type="button" class="float-left relative top-[32px] right-[0px]">취소</button>
@@ -228,6 +254,7 @@
                     Mylists : [],
                     issue : [],
                     issue2 : [],
+                    songs : [],
                     is_showissue: false,
                     is_showNew: false,
                     is_showTop: false,
@@ -254,6 +281,7 @@
                 handle_toggleissue(i) {
                     this.is_showissue = !this.is_showissue;
                     this.idissue = i;
+                    
                 },
                 handle_toggleNew(i) {
                     this.is_showNew = !this.is_showNew;
@@ -262,6 +290,10 @@
                 handle_toggleTop(i) {
                     this.is_showTop = !this.is_showTop;
                     this.idTop = i;
+
+                    Axios
+                    .get(`https://www.music-flo.com/api/meta/v1/album/${this.TopList.data.trackList[i].album.id}/track`)
+                    .then(res => {this.songs = res.data.data.list})
                 },
                 handle_cancelissue() {
                     this.is_showissue = !this.is_showissue;

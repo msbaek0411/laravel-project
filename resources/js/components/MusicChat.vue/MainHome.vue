@@ -163,4 +163,13 @@
     li{
         list-style:none;
      }
+
+     .modallist{
+        clear: both;
+        display: block;
+        overflow: auto;
+        width: 100%;
+        height: 276px;
+        border-spacing: 0;
+     }
     </style>

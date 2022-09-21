@@ -2118,6 +2118,7 @@ __webpack_require__.r(__webpack_exports__);
       Mylists: [],
       issue: [],
       issue2: [],
+      songs: [],
       is_showissue: false,
       is_showNew: false,
       is_showTop: false,
@@ -2152,8 +2153,13 @@ __webpack_require__.r(__webpack_exports__);
       this.idNew = i;
     },
     handle_toggleTop: function handle_toggleTop(i) {
+      var _this2 = this;
+
       this.is_showTop = !this.is_showTop;
       this.idTop = i;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("https://www.music-flo.com/api/meta/v1/album/".concat(this.TopList.data.trackList[i].album.id, "/track")).then(function (res) {
+        _this2.songs = res.data.data.list;
+      });
     },
     handle_cancelissue: function handle_cancelissue() {
       this.is_showissue = !this.is_showissue;
@@ -3361,12 +3367,40 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "w-full h-full"
   }, [_c("img", {
-    staticClass: "float-left pr-4",
+    staticClass: "float-left pr-4 pb-[33px]",
     attrs: {
       src: _vm.TopList.data.trackList[this.idTop].album.imgList[2].url,
       alt: ""
     }
-  }), _vm._v(" "), _c("div", [_c("li", [_vm._v(_vm._s(_vm.TopList.data.trackList[this.idTop].fileUpdateDateTime))]), _vm._v(" "), _c("li", [_vm._v(_vm._s(_vm.TopList.data.trackList[this.idTop].name))]), _vm._v(" "), _c("li", [_vm._v(_vm._s(_vm.TopList.data.trackList[this.idTop].artistList[0].name))]), _vm._v(" "), _c("li", [_vm._v(_vm._s(_vm.TopList.data.trackList[this.idTop].album.title))])])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("div", [_c("li", [_vm._v(_vm._s(_vm.TopList.data.trackList[this.idTop].fileUpdateDateTime))]), _vm._v(" "), _c("li", [_vm._v(_vm._s(_vm.TopList.data.trackList[this.idTop].name))]), _vm._v(" "), _c("li", [_vm._v(_vm._s(_vm.TopList.data.trackList[this.idTop].artistList[0].name))]), _vm._v(" "), _c("li", [_vm._v(_vm._s(_vm.TopList.data.trackList[this.idTop].album.title))])]), _vm._v(" "), _c("table", {
+    staticClass: "table-auto w-full modallist"
+  }, [_vm._m(2), _vm._v(" "), _c("tbody", {
+    staticClass: "w-full table"
+  }, _vm._l(_vm.songs, function (test, i) {
+    return _c("tr", {
+      key: i,
+      staticClass: "itemtr",
+      staticStyle: {
+        clear: "both"
+      }
+    }, [_c("td", {
+      staticStyle: {
+        height: "34px"
+      }
+    }, [_vm._v("        " + _vm._s(i + 1))]), _vm._v(" "), _c("td", {
+      staticStyle: {
+        height: "34px"
+      }
+    }, [_c("div", {
+      staticStyle: {
+        height: "-1px"
+      }
+    }, [_c("div", {
+      staticClass: "text_area"
+    }, [_c("div", {
+      staticClass: "item"
+    }, [_c("li", [_vm._v(_vm._s(_vm.songs[i].name))])])])])])]);
+  }), 0)])]), _vm._v(" "), _c("div", {
     staticClass: "test2"
   }, [_c("button", {
     staticClass: "float-left relative top-[32px] right-[0px]",
@@ -3410,6 +3444,15 @@ var staticRenderFns = [function () {
       src: __webpack_require__(/*! ../../../img/issue1.png */ "./resources/img/issue1.png")
     }
   })]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("thead", {
+    staticClass: "w-full table"
+  }, [_c("tr", {
+    staticClass: "css-tr"
+  }, [_c("th", [_vm._v(".no")]), _vm._v(" "), _c("th", [_vm._v("곡/앨범")])])]);
 }];
 render._withStripped = true;
 
@@ -8095,7 +8138,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.test{\n        border: 1px solid darkgray;\npadding: 2%;\nwidth: 41%;\nheight: 66%;\nposition: absolute;\nbackground: white;\ntop: 15%;\nleft: 28%;\nposition: fixed;\nborder-radius: 38px;\n}\n.test2{\n        position: absolute;\n        bottom: 10%;\n        left: center;\n        left: 50%;\n}\nli{\n    list-style:none;\n}\n", ""]);
+exports.push([module.i, "\n.test{\n        border: 1px solid darkgray;\npadding: 2%;\nwidth: 41%;\nheight: 66%;\nposition: absolute;\nbackground: white;\ntop: 15%;\nleft: 28%;\nposition: fixed;\nborder-radius: 38px;\n}\n.test2{\n        position: absolute;\n        bottom: 10%;\n        left: center;\n        left: 50%;\n}\nli{\n    list-style:none;\n}\n.modallist{\n    clear: both;\n    display: block;\n    overflow: auto;\n    width: 100%;\n    height: 276px;\n    border-spacing: 0;\n}\n", ""]);
 
 // exports
 
