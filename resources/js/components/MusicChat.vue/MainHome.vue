@@ -37,12 +37,11 @@
                     <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].albumName}}</td>
                     <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].createDate}}</td>
                     <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].playlist}}</td>
-                    <td @click="deleteList(i)">삭제</td>
+                    <td @click="deleteList(Main.ChatList[i].id)">삭제</td>
                 </tr>
             </tbody>
         </table>
-            
-            
+            {{Main.ChatList[0].id}}
             
     <!-- Modal  -->
     <div v-show="is_show" class="test">
@@ -128,7 +127,7 @@
                         },
                         deleteList(i) {
                             alert('삭제 됐습니다.')
-                            Axios.delete(`http://127.0.0.1:8000/api/chatlists/${i+1}`)
+                            Axios.delete(`http://127.0.0.1:8000/api/chatlists/${i}`)
                             .then(res => {
                                 window.location.reload();
                             });

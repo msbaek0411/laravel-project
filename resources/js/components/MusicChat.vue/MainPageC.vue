@@ -58,32 +58,6 @@
                 </div>
             </section>
 
-            <!-- new -->
-            <section class="bg-white py-8">           
-                <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
-                    <nav id="new" class="w-full top-0 px-6 py-1">
-                        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
-                            <a class="uppercase tracking-wide no-underline hover:text-[#008d8d] font-bold text-gray-800 text-xl " href="MusicList/new">오늘 발매 음악</a>
-                            <div class="flex items-center " id="new-nav-content" >
-                                <a class="pl-3 inline-block no-underline hover:text-[#008d8d]" href="MusicList/new">더보기</a>
-                                <a class="pl-3 inline-block no-underline hover:text-[#008d8d]" href="#">
-                                    <svg class="fill-current hover:text-[#008d8d]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                        <path d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z" />
-                                    </svg>
-                                </a>
-                            </div>
-                    </div>
-                    </nav>
-
-                    <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col" v-for="(test, i) in TopList.data.trackList" v-bind:key=i>
-                        <div @click="handle_toggleNew(i)">
-                            <img class="hover:grow hover:shadow-lg w-full" :src="NewList.data.list[i].album.imgList[2].url">
-                            <p class="m-0">{{NewList.data.list[i].name }}</p>
-                            <p class="">{{NewList.data.list[i].artistList[0].name}}</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
             <!-- top -->
             <section class="bg-white py-8">
             <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
@@ -114,6 +88,65 @@
             </div>
 
             </section>
+            <!-- my -->
+            <section class="w-full p-[249px] text-center bg-stone-200" v-if="loginid == null">           
+            
+                    <a href="http://127.0.0.1:8000/login">
+                            로그인 후 확인해주세요
+                    </a>
+            </section>
+
+            <section class="bg-white py-8" v-else>           
+                <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
+                    <nav id="new" class="w-full top-0 px-6 py-1">
+                        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
+                            <a class="uppercase tracking-wide no-underline hover:text-[#008d8d] font-bold text-gray-800 text-xl " href="MusicList/new">나의 플레이리스트</a>
+                            <div class="flex items-center " id="new-nav-content" >
+                                <a class="pl-3 inline-block no-underline hover:text-[#008d8d]" href="MusicList/new">더보기</a>
+                                <a class="pl-3 inline-block no-underline hover:text-[#008d8d]" href="#">
+                                    <svg class="fill-current hover:text-[#008d8d]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z" />
+                                    </svg>
+                                </a>
+                            </div>
+                    </div>
+                    </nav>
+                    <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col" v-for="(test, i) in MyList.ChatList" v-bind:key=i>
+                        <div>
+                            <img class="hover:grow hover:shadow-lg w-full" :src="MyList.ChatList[i].img2">
+                            <p class="m-0">{{MyList.ChatList[i].title }}</p>
+                            <p class="">{{MyList.ChatList[i].artist}}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- new -->
+            <section class="bg-white py-8">           
+                <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
+                    <nav id="new" class="w-full top-0 px-6 py-1">
+                        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
+                            <a class="uppercase tracking-wide no-underline hover:text-[#008d8d] font-bold text-gray-800 text-xl " href="MusicList/new">오늘 발매 음악</a>
+                            <div class="flex items-center " id="new-nav-content" >
+                                <a class="pl-3 inline-block no-underline hover:text-[#008d8d]" href="MusicList/new">더보기</a>
+                                <a class="pl-3 inline-block no-underline hover:text-[#008d8d]" href="#">
+                                    <svg class="fill-current hover:text-[#008d8d]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z" />
+                                    </svg>
+                                </a>
+                            </div>
+                    </div>
+                    </nav>
+
+                    <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col" v-for="(test, i) in TopList.data.trackList" v-bind:key=i>
+                        <div @click="handle_toggleNew(i)">
+                            <img class="hover:grow hover:shadow-lg w-full" :src="NewList.data.list[i].album.imgList[2].url">
+                            <p class="m-0">{{NewList.data.list[i].name }}</p>
+                            <p class="">{{NewList.data.list[i].artistList[0].name}}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </div>
 
 
@@ -178,6 +211,12 @@
         import layout from '../layout/layout.vue'
 
         export default {
+            props: {
+                loginid : {
+                    type: Number,
+                    required: true
+                }
+            },
             components: {
                 layout
             },
@@ -185,6 +224,8 @@
                 return {
                     NewList : [],
                     TopList : [],
+                    MyList : [],
+                    Mylists : [],
                     issue : [],
                     issue2 : [],
                     is_showissue: false,
@@ -202,16 +243,12 @@
                 Axios
                     .get('https://www.music-flo.com/api/meta/v1/track/KPOP/new?page=1&size=8')
                     .then(res=>{this.NewList = res.data})
-
-                //삭제 예정 3209
-                Axios
-                    .get('https://www.music-flo.com/api/meta/v1/track/KPOP/new?page=1&size=5')
-                    .then(res => {this.issue = res.data})
-
                 Axios
                     .get('http://127.0.0.1:8000/api/issue')
                     .then(res => {this.issue2 = res.data})
-                
+                Axios
+                    .get(`http://127.0.0.1:8000/api/chatlists/alls/${this.loginid}`)
+                    .then(res => {this.MyList = res.data})
             },
             methods: {
                 handle_toggleissue(i) {

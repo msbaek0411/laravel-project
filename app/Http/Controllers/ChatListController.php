@@ -50,7 +50,7 @@ class ChatListController extends Controller
         // data 생성 
         // $ChatList = ChatList::find($i);
         // $ChatList->delete();
-        ChatList::where('index', $i)->delete();
+        ChatList::where('id', $i)->delete();
               
         
     }
@@ -63,7 +63,14 @@ class ChatListController extends Controller
             'ChatList' => $ChatList
         ],200);
     }
-      
+    public function alldatas($i)
+    {
+        $ChatList = ChatList::where('userid', $i)->get();
+
+        return response()->json([
+            'ChatList' => $ChatList
+        ],200);
+    }
 
 
 }

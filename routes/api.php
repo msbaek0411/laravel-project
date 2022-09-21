@@ -26,8 +26,14 @@ Route::get('List', 'ListFileController@index');
 
 Route::get('/chatlists', 'ChatListController@index');
 Route::get('/chatlists/all', 'ChatListController@alldata');
+
+Route::get('/chatlists/alls/{index}', 'ChatListController@alldatas');
+
 Route::post('/chatlists', 'ChatListController@store');
 Route::delete('/chatlists/{index}', 'ChatListController@destory');
+
+Route::delete('/admin/user/{id}', 'AdminController@destory');
+Route::delete('/admin/issue/{id}', 'AdminIssueController@destory');
 
 Route::get('/issue', 'IssueController@index');
 

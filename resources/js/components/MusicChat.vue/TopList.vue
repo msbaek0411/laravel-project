@@ -8,6 +8,8 @@
         <a class="btn btn-outline btn-accent">test</a>
 
         <h1 class="text-4xl leading-loose">Top 100 playlist</h1>
+        <br>
+
         <div>
             <input v-on:keyup="filter" type="text" id="value" placeholder="Type to Search" class="ml-[85%]">
         </div>
@@ -74,6 +76,7 @@
                     <div>
                         <li>
                             <div class="float-left">수렵곡</div>
+                            <!-- <div>{{albumlist.data.list}}</div> -->
                         </li>
                     </div>
                     <!-- <div class="">
@@ -119,10 +122,13 @@
             return {tests: [],
                     trackList:[],
                     is_show: false,
-                    id: '1',
+                    id: '0',
                     imgList: [{ 'name' : 1, 'name2' : 2} ,{'name' : 2, 'name2' : 2}],
                     imglistnum : '1',
                     toggle: true,
+                    albumid: '409131223',
+                    albumlist : [],
+                    test3209:[]
                     }
         },
         created() {
@@ -132,6 +138,17 @@
                 )
                 .then(res => {
                     this.tests = res.data
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+
+            Axios
+                .get(
+                        `https://www.music-flo.com/api/meta/v1/album/${this.albumid}/track`
+                )
+                .then(res => {
+                    this.test3209 = res.data
                 })
                 .catch(error => {
                     console.log(error)
@@ -148,6 +165,9 @@
                     handle_toggle: function(i){ 
                                 this.is_show = !this.is_show; // #2, #3
                                 this.id = i
+                                this.albumid = this.tests.data.trackList[i].album.id
+                                Axios.get(`https://www.music-flo.com/api/meta/v1/album/${this.albumid}/track`)
+                                    .then(res => {this.albumlist = res.data})
                                 },
                                 
                     handle_cancel: function(){

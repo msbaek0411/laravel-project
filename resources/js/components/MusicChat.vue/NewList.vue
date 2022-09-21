@@ -8,7 +8,7 @@
         <a class="btn btn-outline btn-accent">test</a>
         
         <h1 class="text-4xl leading-loose">NEW 100 playlist</h1>
-
+        {{tests.data.list[0].name}}
 
         <table class="table-auto">
             <thead>
@@ -50,7 +50,9 @@
             },
 
             data() {
-                return {tests: []}
+                return {
+                    tests: [],
+                }
             },
             created() {
                 Axios

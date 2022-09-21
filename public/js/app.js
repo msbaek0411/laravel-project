@@ -1903,10 +1903,107 @@ module.exports = {
 /*!**********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MusicChat.vue/AdminPage.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _layout_layout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layout/layout.vue */ "./resources/js/components/layout/layout.vue");
 
 
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    layout: _layout_layout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      userlist: [],
+      issuelist: [],
+      chatlist: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/users').then(function (res) {
+      _this.userlist = res.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/issue').then(function (res) {
+      _this.issuelist = res.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/chatlists/all').then(function (res) {
+      _this.chatlist = res.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
+  methods: {
+    deleteList: function deleteList(i) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("http://127.0.0.1:8000/api/admin/user/".concat(i)).then(function (res) {
+        window.location.reload();
+      });
+    },
+    deleteListissue: function deleteListissue(i) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("http://127.0.0.1:8000/api/admin/issue/".concat(i)).then(function (res) {
+        window.location.reload();
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MusicChat.vue/AdminPageDetail.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MusicChat.vue/AdminPageDetail.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _layout_layout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layout/layout.vue */ "./resources/js/components/layout/layout.vue");
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    layout: _layout_layout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      userlist: [],
+      issuelist: [],
+      chatlist: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/users').then(function (res) {
+      _this.userlist = res.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/issue').then(function (res) {
+      _this.issuelist = res.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/chatlists/all').then(function (res) {
+      _this.chatlist = res.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }
+});
 
 /***/ }),
 
@@ -1973,7 +2070,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteList: function deleteList(i) {
       alert('삭제 됐습니다.');
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("http://127.0.0.1:8000/api/chatlists/".concat(i + 1)).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("http://127.0.0.1:8000/api/chatlists/".concat(i)).then(function (res) {
         window.location.reload();
       });
     },
@@ -2004,6 +2101,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    loginid: {
+      type: Number,
+      required: true
+    }
+  },
   components: {
     layout: _layout_layout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -2011,6 +2114,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       NewList: [],
       TopList: [],
+      MyList: [],
+      Mylists: [],
       issue: [],
       issue2: [],
       is_showissue: false,
@@ -2029,13 +2134,12 @@ __webpack_require__.r(__webpack_exports__);
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('https://www.music-flo.com/api/meta/v1/track/KPOP/new?page=1&size=8').then(function (res) {
       _this.NewList = res.data;
-    }); //삭제 예정 3209
-
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('https://www.music-flo.com/api/meta/v1/track/KPOP/new?page=1&size=5').then(function (res) {
-      _this.issue = res.data;
     });
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/issue').then(function (res) {
       _this.issue2 = res.data;
+    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/chatlists/alls/".concat(this.loginid)).then(function (res) {
+      _this.MyList = res.data;
     });
   },
   methods: {
@@ -2140,7 +2244,7 @@ __webpack_require__.r(__webpack_exports__);
       tests: [],
       trackList: [],
       is_show: false,
-      id: '1',
+      id: '0',
       imgList: [{
         'name': 1,
         'name2': 2
@@ -2149,7 +2253,10 @@ __webpack_require__.r(__webpack_exports__);
         'name2': 2
       }],
       imglistnum: '1',
-      toggle: true
+      toggle: true,
+      albumid: '409131223',
+      albumlist: [],
+      test3209: []
     };
   },
   created: function created() {
@@ -2157,6 +2264,11 @@ __webpack_require__.r(__webpack_exports__);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('https://www.music-flo.com/api/display/v1/browser/chart/1/track/list?size=20').then(function (res) {
       _this.tests = res.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("https://www.music-flo.com/api/meta/v1/album/".concat(this.albumid, "/track")).then(function (res) {
+      _this.test3209 = res.data;
     })["catch"](function (error) {
       console.log(error);
     });
@@ -2171,9 +2283,15 @@ __webpack_require__.r(__webpack_exports__);
       this.toggle = !this.toggle;
     },
     handle_toggle: function handle_toggle(i) {
+      var _this3 = this;
+
       this.is_show = !this.is_show; // #2, #3
 
       this.id = i;
+      this.albumid = this.tests.data.trackList[i].album.id;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("https://www.music-flo.com/api/meta/v1/album/".concat(this.albumid, "/track")).then(function (res) {
+        _this3.albumlist = res.data;
+      });
     },
     handle_cancel: function handle_cancel() {
       this.is_show = !this.is_show;
@@ -2283,13 +2401,358 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 var render = function render() {
   var _vm = this,
-      _c = _vm._self._c,
-      _setup = _vm._self._setupProxy;
+      _c = _vm._self._c;
 
-  return _c("div", [_vm._v("\n    adminPage\n")]);
+  return _c("div", [_c("div", [_vm._v("users계정 확인 / users http://127.0.0.1:8000/api/users")]), _vm._v(" "), _c("div", [_vm._v("issue 정보 확인 / issues http://127.0.0.1:8000/api/issue")]), _vm._v(" "), _c("div", [_vm._v("사용자별 플레이리스트 확인 / chat_list http://127.0.0.1:8000/api/chatlists/all")]), _vm._v(" "), _c("section", {
+    staticClass: "antialiased bg-gray-100 text-gray-600 px-4",
+    attrs: {
+      "x-data": "app"
+    }
+  }, [_c("div", {
+    staticClass: "flex flex-col justify-center h-full"
+  }, [_c("div", {
+    staticClass: "w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200"
+  }, [_vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "overflow-x-auto p-3"
+  }, [_c("table", {
+    staticClass: "table-auto w-full"
+  }, [_vm._m(1), _vm._v(" "), _vm._l(_vm.userlist.users, function (test, i) {
+    return _c("tbody", {
+      key: i,
+      staticClass: "text-sm divide-y divide-gray-100"
+    }, [_c("tr", [_c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(i + 1) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.userlist.users[i].name) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.userlist.users[i].email) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v(" \n                                        " + _vm._s(_vm.userlist.users[i].created_at) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.userlist.users[i].updated_at) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_c("a", {
+      staticClass: "float-left",
+      attrs: {
+        href: "http://127.0.0.1:8000/admin/user/" + _vm.userlist.users[i].id + "/edit"
+      }
+    }, [_vm._v("수정")]), _vm._v(" "), _c("div", {
+      on: {
+        click: function click($event) {
+          return _vm.deleteList(_vm.userlist.users[i].id);
+        }
+      }
+    }, [_vm._v("삭제")])])])]);
+  })], 2)])])])]), _vm._v(" "), _c("section", {
+    staticClass: "antialiased bg-gray-100 text-gray-600 px-4",
+    attrs: {
+      "x-data": "app"
+    }
+  }, [_c("div", {
+    staticClass: "flex flex-col justify-center h-full"
+  }, [_c("div", {
+    staticClass: "w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200"
+  }, [_vm._m(2), _vm._v(" "), _c("div", {
+    staticClass: "overflow-x-auto p-3"
+  }, [_c("table", {
+    staticClass: "table-auto w-full"
+  }, [_vm._m(3), _vm._v(" "), _vm._l(_vm.issuelist.issue, function (tests, i) {
+    return _c("tbody", {
+      key: i,
+      staticClass: "text-sm divide-y divide-gray-100"
+    }, [_c("tr", [_c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.issuelist.issue[i].img) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.issuelist.issue[i].title) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v(" \n                                        " + _vm._s(_vm.issuelist.issue[i].artist) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.issuelist.issue[i].href) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.issuelist.issue[i].contents) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.issuelist.issue[i].created_at) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_c("a", {
+      staticClass: "float-left",
+      attrs: {
+        href: "http://127.0.0.1:8000/admin/issue/" + _vm.issuelist.issue[i].id + "/edit"
+      }
+    }, [_vm._v("수정")]), _vm._v(" "), _c("div", {
+      on: {
+        click: function click($event) {
+          return _vm.deleteListissue(_vm.issuelist.issue[i].id);
+        }
+      }
+    }, [_vm._v("삭제")])]), _vm._v("\n                                    " + _vm._s(_vm.issuelist.issue[0].id) + "\n                                ")])]);
+  })], 2)])])])]), _vm._v(" "), _c("section", {
+    staticClass: "antialiased bg-gray-100 text-gray-600 px-4",
+    attrs: {
+      "x-data": "app"
+    }
+  }, [_c("div", {
+    staticClass: "flex flex-col justify-center h-full"
+  }, [_c("div", {
+    staticClass: "w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200"
+  }, [_vm._m(4), _vm._v(" "), _c("div", {
+    staticClass: "overflow-x-auto p-3"
+  }, [_c("table", {
+    staticClass: "table-auto w-full"
+  }, [_vm._m(5), _vm._v(" "), _vm._l(_vm.chatlist.ChatList, function (testa, i) {
+    return _c("tbody", {
+      key: i,
+      staticClass: "text-sm divide-y divide-gray-100"
+    }, [_c("tr", [_c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.chatlist.ChatList[i].userId) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.chatlist.ChatList[i].img) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v(" \n                                        " + _vm._s(_vm.chatlist.ChatList[i].img2) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.chatlist.ChatList[i].title) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.chatlist.ChatList[i].artist) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.chatlist.ChatList[i].albumName) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.chatlist.ChatList[i].created_at) + "\n                                    ")])])]);
+  })], 2)])])])])]);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("header", {
+    staticClass: "px-5 py-4 border-b border-gray-100"
+  }, [_c("div", {
+    staticClass: "font-semibold text-gray-800 float-left"
+  }, [_vm._v("총 users 계정")]), _vm._v(" "), _c("a", {
+    staticClass: "font-semibold text-gray-800 float-left ml-[87%] mr-[1%]",
+    attrs: {
+      href: "/admin/createuser"
+    }
+  }, [_vm._v("추가")])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("thead", {
+    staticClass: "text-xs font-semibold uppercase text-gray-400 bg-gray-50"
+  }, [_c("tr", [_c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-left"
+  }, [_vm._v("idx.")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-left"
+  }, [_vm._v("name")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-left"
+  }, [_vm._v("email")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-left"
+  }, [_vm._v("created")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-center"
+  }, [_vm._v("updated")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-center"
+  }, [_vm._v("수정/삭제")])])])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("header", {
+    staticClass: "px-5 py-4 border-b border-gray-100"
+  }, [_c("div", {
+    staticClass: "font-semibold text-gray-800"
+  }, [_vm._v("issue 등록 및 정보")]), _vm._v(" "), _c("a", {
+    staticClass: "font-semibold text-gray-800 float-left ml-[87%] mr-[1%]",
+    attrs: {
+      href: "/admin/issue/createuser"
+    }
+  }, [_vm._v("추가")])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("thead", {
+    staticClass: "text-xs font-semibold uppercase text-gray-400 bg-gray-50"
+  }, [_c("tr", [_c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-left"
+  }, [_vm._v("img주소")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-left"
+  }, [_vm._v("title")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-left"
+  }, [_vm._v("artist")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-center"
+  }, [_vm._v("유튜브 주소")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-center"
+  }, [_vm._v("iframe 주소")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-center"
+  }, [_vm._v("등록일자")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-center"
+  }, [_vm._v("수정 / 삭제")])])])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("header", {
+    staticClass: "px-5 py-4 border-b border-gray-100"
+  }, [_c("div", {
+    staticClass: "font-semibold text-gray-800"
+  }, [_vm._v("사용자별 플레이리스트")])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("thead", {
+    staticClass: "text-xs font-semibold uppercase text-gray-400 bg-gray-50"
+  }, [_c("tr", [_c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-left"
+  }, [_vm._v("userid")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-left"
+  }, [_vm._v("small img")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-left"
+  }, [_vm._v("big img")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-center"
+  }, [_vm._v("tittle")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-center"
+  }, [_vm._v("artist")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-center"
+  }, [_vm._v("albumname")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-center"
+  }, [_vm._v("createdate")])])])]);
+}];
+render._withStripped = true;
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MusicChat.vue/AdminPageDetail.vue?vue&type=template&id=351f889a&":
+/*!**************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MusicChat.vue/AdminPageDetail.vue?vue&type=template&id=351f889a& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function render() {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", [_c("div", [_vm._v("users계정 확인 / users http://127.0.0.1:8000/api/users")]), _vm._v(" "), _c("div", [_vm._v("issue 정보 확인 / issues http://127.0.0.1:8000/api/issue")]), _vm._v(" "), _c("div", [_vm._v("사용자별 플레이리스트 확인 / chat_list http://127.0.0.1:8000/api/chatlists/all")]), _vm._v(" "), _c("section", {
+    staticClass: "antialiased bg-gray-100 text-gray-600 h-[47vh] px-4",
+    attrs: {
+      "x-data": "app"
+    }
+  }, [_c("div", {
+    staticClass: "flex flex-col justify-center h-full"
+  }, [_c("div", {
+    staticClass: "w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200"
+  }, [_vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "overflow-x-auto p-3"
+  }, [_c("table", {
+    staticClass: "table-auto w-full"
+  }, [_vm._m(1), _vm._v(" "), _vm._l(_vm.userlist.users, function (test, i) {
+    return _c("tbody", {
+      key: test,
+      staticClass: "text-sm divide-y divide-gray-100"
+    }, [_c("tr", [_c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(i + 1) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.userlist.users[i].name) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.userlist.users[i].email) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v(" \n                                        " + _vm._s(_vm.userlist.users[i].created_at) + "\n                                    ")]), _vm._v(" "), _c("td", {
+      staticClass: "p-2"
+    }, [_vm._v("\n                                        " + _vm._s(_vm.userlist.users[i].updated_at) + "\n                                    ")])])]);
+  })], 2)])])])])]);
+};
+
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("header", {
+    staticClass: "px-5 py-4 border-b border-gray-100"
+  }, [_c("div", {
+    staticClass: "font-semibold text-gray-800 float-left"
+  }, [_vm._v("총 users 계정")]), _vm._v(" "), _c("div", {
+    staticClass: "font-semibold text-gray-800 float-left ml-[81%] mr-[3%]"
+  }, [_vm._v("수정")]), _vm._v(" "), _c("div", {
+    staticClass: "font-semibold text-gray-800"
+  }, [_vm._v("삭제")])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("thead", {
+    staticClass: "text-xs font-semibold uppercase text-gray-400 bg-gray-50"
+  }, [_c("tr", [_c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-left"
+  }, [_vm._v("idx.")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-left"
+  }, [_vm._v("name")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-left"
+  }, [_vm._v("email")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-left"
+  }, [_vm._v("created")])]), _vm._v(" "), _c("th", {
+    staticClass: "p-2"
+  }, [_c("div", {
+    staticClass: "font-semibold text-center"
+  }, [_vm._v("updated")])])])]);
+}];
 render._withStripped = true;
 
 
@@ -2399,11 +2862,11 @@ var render = function render() {
     }, [_vm._v(_vm._s(_vm.Main.ChatList[i].playlist))]), _vm._v(" "), _c("td", {
       on: {
         click: function click($event) {
-          return _vm.deleteList(i);
+          return _vm.deleteList(_vm.Main.ChatList[i].id);
         }
       }
     }, [_vm._v("삭제")])]);
-  }), 0)]), _vm._v(" "), _c("div", {
+  }), 0)]), _vm._v("\n        " + _vm._s(_vm.Main.ChatList[0].id) + "\n        \n"), _vm._v(" "), _c("div", {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -2608,67 +3071,6 @@ var render = function render() {
   }, [_c("a", {
     staticClass: "uppercase tracking-wide no-underline hover:text-[#008d8d] font-bold text-gray-800 text-xl",
     attrs: {
-      href: "MusicList/new"
-    }
-  }, [_vm._v("오늘 발매 음악")]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center",
-    attrs: {
-      id: "new-nav-content"
-    }
-  }, [_c("a", {
-    staticClass: "pl-3 inline-block no-underline hover:text-[#008d8d]",
-    attrs: {
-      href: "MusicList/new"
-    }
-  }, [_vm._v("더보기")]), _vm._v(" "), _c("a", {
-    staticClass: "pl-3 inline-block no-underline hover:text-[#008d8d]",
-    attrs: {
-      href: "#"
-    }
-  }, [_c("svg", {
-    staticClass: "fill-current hover:text-[#008d8d]",
-    attrs: {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: "24",
-      height: "24",
-      viewBox: "0 0 24 24"
-    }
-  }, [_c("path", {
-    attrs: {
-      d: "M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z"
-    }
-  })])])])])]), _vm._v(" "), _vm._l(_vm.TopList.data.trackList, function (test, i) {
-    return _c("div", {
-      key: i,
-      staticClass: "w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col"
-    }, [_c("div", {
-      on: {
-        click: function click($event) {
-          return _vm.handle_toggleNew(i);
-        }
-      }
-    }, [_c("img", {
-      staticClass: "hover:grow hover:shadow-lg w-full",
-      attrs: {
-        src: _vm.NewList.data.list[i].album.imgList[2].url
-      }
-    }), _vm._v(" "), _c("p", {
-      staticClass: "m-0"
-    }, [_vm._v(_vm._s(_vm.NewList.data.list[i].name))]), _vm._v(" "), _c("p", {}, [_vm._v(_vm._s(_vm.NewList.data.list[i].artistList[0].name))])])]);
-  })], 2)]), _vm._v(" "), _c("section", {
-    staticClass: "bg-white py-8"
-  }, [_c("div", {
-    staticClass: "container mx-auto flex items-center flex-wrap pt-4 pb-12"
-  }, [_c("nav", {
-    staticClass: "w-full top-0 px-6 py-1",
-    attrs: {
-      id: "new"
-    }
-  }, [_c("div", {
-    staticClass: "w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3"
-  }, [_c("a", {
-    staticClass: "uppercase tracking-wide no-underline hover:text-[#008d8d] font-bold text-gray-800 text-xl",
-    attrs: {
       href: "#"
     }
   }, [_vm._v("오늘 인기 음악")]), _vm._v(" "), _c("div", {
@@ -2716,6 +3118,128 @@ var render = function render() {
     }), _vm._v(" "), _c("p", {
       staticClass: "m-0"
     }, [_vm._v(_vm._s(_vm.TopList.data.trackList[i].name))]), _vm._v(" "), _c("p", {}, [_vm._v(_vm._s(_vm.TopList.data.trackList[i].artistList[0].name))])])]);
+  })], 2)]), _vm._v(" "), _vm.loginid == null ? _c("section", {
+    staticClass: "w-full p-[249px] text-center bg-stone-200"
+  }, [_c("a", {
+    attrs: {
+      href: "http://127.0.0.1:8000/login"
+    }
+  }, [_vm._v("\n                        로그인 후 확인해주세요\n                ")])]) : _c("section", {
+    staticClass: "bg-white py-8"
+  }, [_c("div", {
+    staticClass: "container mx-auto flex items-center flex-wrap pt-4 pb-12"
+  }, [_c("nav", {
+    staticClass: "w-full top-0 px-6 py-1",
+    attrs: {
+      id: "new"
+    }
+  }, [_c("div", {
+    staticClass: "w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3"
+  }, [_c("a", {
+    staticClass: "uppercase tracking-wide no-underline hover:text-[#008d8d] font-bold text-gray-800 text-xl",
+    attrs: {
+      href: "MusicList/new"
+    }
+  }, [_vm._v("나의 플레이리스트")]), _vm._v(" "), _c("div", {
+    staticClass: "flex items-center",
+    attrs: {
+      id: "new-nav-content"
+    }
+  }, [_c("a", {
+    staticClass: "pl-3 inline-block no-underline hover:text-[#008d8d]",
+    attrs: {
+      href: "MusicList/new"
+    }
+  }, [_vm._v("더보기")]), _vm._v(" "), _c("a", {
+    staticClass: "pl-3 inline-block no-underline hover:text-[#008d8d]",
+    attrs: {
+      href: "#"
+    }
+  }, [_c("svg", {
+    staticClass: "fill-current hover:text-[#008d8d]",
+    attrs: {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "24",
+      height: "24",
+      viewBox: "0 0 24 24"
+    }
+  }, [_c("path", {
+    attrs: {
+      d: "M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z"
+    }
+  })])])])])]), _vm._v(" "), _vm._l(_vm.MyList.ChatList, function (test, i) {
+    return _c("div", {
+      key: i,
+      staticClass: "w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col"
+    }, [_c("div", [_c("img", {
+      staticClass: "hover:grow hover:shadow-lg w-full",
+      attrs: {
+        src: _vm.MyList.ChatList[i].img2
+      }
+    }), _vm._v(" "), _c("p", {
+      staticClass: "m-0"
+    }, [_vm._v(_vm._s(_vm.MyList.ChatList[i].title))]), _vm._v(" "), _c("p", {}, [_vm._v(_vm._s(_vm.MyList.ChatList[i].artist))])])]);
+  })], 2)]), _vm._v(" "), _c("section", {
+    staticClass: "bg-white py-8"
+  }, [_c("div", {
+    staticClass: "container mx-auto flex items-center flex-wrap pt-4 pb-12"
+  }, [_c("nav", {
+    staticClass: "w-full top-0 px-6 py-1",
+    attrs: {
+      id: "new"
+    }
+  }, [_c("div", {
+    staticClass: "w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3"
+  }, [_c("a", {
+    staticClass: "uppercase tracking-wide no-underline hover:text-[#008d8d] font-bold text-gray-800 text-xl",
+    attrs: {
+      href: "MusicList/new"
+    }
+  }, [_vm._v("오늘 발매 음악")]), _vm._v(" "), _c("div", {
+    staticClass: "flex items-center",
+    attrs: {
+      id: "new-nav-content"
+    }
+  }, [_c("a", {
+    staticClass: "pl-3 inline-block no-underline hover:text-[#008d8d]",
+    attrs: {
+      href: "MusicList/new"
+    }
+  }, [_vm._v("더보기")]), _vm._v(" "), _c("a", {
+    staticClass: "pl-3 inline-block no-underline hover:text-[#008d8d]",
+    attrs: {
+      href: "#"
+    }
+  }, [_c("svg", {
+    staticClass: "fill-current hover:text-[#008d8d]",
+    attrs: {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "24",
+      height: "24",
+      viewBox: "0 0 24 24"
+    }
+  }, [_c("path", {
+    attrs: {
+      d: "M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z"
+    }
+  })])])])])]), _vm._v(" "), _vm._l(_vm.TopList.data.trackList, function (test, i) {
+    return _c("div", {
+      key: i,
+      staticClass: "w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col"
+    }, [_c("div", {
+      on: {
+        click: function click($event) {
+          return _vm.handle_toggleNew(i);
+        }
+      }
+    }, [_c("img", {
+      staticClass: "hover:grow hover:shadow-lg w-full",
+      attrs: {
+        src: _vm.NewList.data.list[i].album.imgList[2].url
+      }
+    }), _vm._v(" "), _c("p", {
+      staticClass: "m-0"
+    }, [_vm._v(_vm._s(_vm.NewList.data.list[i].name))]), _vm._v(" "), _c("p", {}, [_vm._v(_vm._s(_vm.NewList.data.list[i].artistList[0].name))])])]);
   })], 2)])]), _vm._v(" "), _c("div", {
     directives: [{
       name: "show",
@@ -2928,7 +3452,7 @@ var render = function render() {
     staticClass: "btn btn-outline btn-accent"
   }, [_vm._v("test")]), _vm._v(" "), _c("h1", {
     staticClass: "text-4xl leading-loose"
-  }, [_vm._v("NEW 100 playlist")]), _vm._v(" "), _c("table", {
+  }, [_vm._v("NEW 100 playlist")]), _vm._v("\n    " + _vm._s(_vm.tests.data.list[0].name) + "\n\n    "), _c("table", {
     staticClass: "table-auto"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.tests.data.list, function (test, i) {
     return _c("tr", {
@@ -2992,7 +3516,7 @@ var render = function render() {
     staticClass: "btn btn-outline btn-accent"
   }, [_vm._v("test")]), _vm._v(" "), _c("h1", {
     staticClass: "text-4xl leading-loose"
-  }, [_vm._v("Top 100 playlist")]), _vm._v(" "), _c("div", [_c("input", {
+  }, [_vm._v("Top 100 playlist")]), _vm._v(" "), _c("br"), _vm._v(" "), _c("div", [_c("input", {
     staticClass: "ml-[85%]",
     attrs: {
       type: "text",
@@ -51613,7 +52137,8 @@ Vue.component('Chat4', __webpack_require__(/*! ./components/MusicChat.vue/NewLis
 Vue.component('Chat5', __webpack_require__(/*! ./components/MusicChat.vue/TopList */ "./resources/js/components/MusicChat.vue/TopList.vue")["default"]);
 Vue.component('Chat6', __webpack_require__(/*! ./components/MusicChat.vue/MainHome */ "./resources/js/components/MusicChat.vue/MainHome.vue")["default"]);
 Vue.component('Chat7', __webpack_require__(/*! ./components/MusicChat.vue/MainPageC */ "./resources/js/components/MusicChat.vue/MainPageC.vue")["default"]);
-Vue.component('Chat8', __webpack_require__(/*! ./components/MusicChat.vue/AdminPage */ "./resources/js/components/MusicChat.vue/AdminPage.vue")["default"]); // Vue.component('TestList', require('./components/TestList.vue').default);
+Vue.component('Chat8', __webpack_require__(/*! ./components/MusicChat.vue/AdminPage */ "./resources/js/components/MusicChat.vue/AdminPage.vue")["default"]);
+Vue.component('Chat9', __webpack_require__(/*! ./components/MusicChat.vue/AdminPageDetail */ "./resources/js/components/MusicChat.vue/AdminPageDetail.vue")["default"]); // Vue.component('TestList', require('./components/TestList.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -51676,15 +52201,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!*************************************************************!*\
   !*** ./resources/js/components/MusicChat.vue/AdminPage.vue ***!
   \*************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AdminPage_vue_vue_type_template_id_6ff94569___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AdminPage.vue?vue&type=template&id=6ff94569& */ "./resources/js/components/MusicChat.vue/AdminPage.vue?vue&type=template&id=6ff94569&");
 /* harmony import */ var _AdminPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminPage.vue?vue&type=script&lang=js& */ "./resources/js/components/MusicChat.vue/AdminPage.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _AdminPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _AdminPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -51714,15 +52238,13 @@ component.options.__file = "resources/js/components/MusicChat.vue/AdminPage.vue"
 /*!**************************************************************************************!*\
   !*** ./resources/js/components/MusicChat.vue/AdminPage.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminPage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MusicChat.vue/AdminPage.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -51739,6 +52261,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPage_vue_vue_type_template_id_6ff94569___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPage_vue_vue_type_template_id_6ff94569___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/MusicChat.vue/AdminPageDetail.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/components/MusicChat.vue/AdminPageDetail.vue ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AdminPageDetail_vue_vue_type_template_id_351f889a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AdminPageDetail.vue?vue&type=template&id=351f889a& */ "./resources/js/components/MusicChat.vue/AdminPageDetail.vue?vue&type=template&id=351f889a&");
+/* harmony import */ var _AdminPageDetail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminPageDetail.vue?vue&type=script&lang=js& */ "./resources/js/components/MusicChat.vue/AdminPageDetail.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AdminPageDetail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AdminPageDetail_vue_vue_type_template_id_351f889a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AdminPageDetail_vue_vue_type_template_id_351f889a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/MusicChat.vue/AdminPageDetail.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/MusicChat.vue/AdminPageDetail.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/MusicChat.vue/AdminPageDetail.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPageDetail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminPageDetail.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MusicChat.vue/AdminPageDetail.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPageDetail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/MusicChat.vue/AdminPageDetail.vue?vue&type=template&id=351f889a&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/MusicChat.vue/AdminPageDetail.vue?vue&type=template&id=351f889a& ***!
+  \**************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPageDetail_vue_vue_type_template_id_351f889a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminPageDetail.vue?vue&type=template&id=351f889a& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MusicChat.vue/AdminPageDetail.vue?vue&type=template&id=351f889a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPageDetail_vue_vue_type_template_id_351f889a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPageDetail_vue_vue_type_template_id_351f889a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

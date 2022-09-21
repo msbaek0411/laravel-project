@@ -17,13 +17,10 @@
 
 @section('content')
 
-
-
-@if(auth()->id() > 0)
-    <div class="container"><Chat7 :loginid="{{ auth()->id() }}"></Chat7></div>
-    @else
-    <div class="container"><Chat7></Chat7></div>
-    @endif
+<div class="container">
+    {{$id}}
+    <Chat9/>
+</div>
 @endsection
 
     </body>
