@@ -1,60 +1,157 @@
 <template>
 
-    <div class="h-full">
-
-        <a class="btn btn-outline btn-accent" href="/MusicList/top">TOP100</a>
+    <div class="">
+        
+        <!-- <a class="btn btn-outline btn-accent" href="/MusicList/top">TOP100</a>
         <a class="btn btn-active btn-accent" href="/MusicList/new">NEW</a>
         <a class="btn btn-outline btn-accent" href="/MusicList/MainHome">Mainhome</a>
-        <a class="btn btn-outline btn-accent">test</a>
-        
-        <h1 class="text-4xl leading-loose">NEW 100 playlist</h1>
-        {{tests.data.list[0].name}}
+        <a class="btn btn-outline btn-accent" href="/admin">admin</a> -->
 
-        <table class="table-auto">
+        <h1 class="text-4xl leading-loose">Top 100 playlist</h1>
+        <br>
+
+        <div>
+            <input v-on:keyup="filter" type="text" id="value" placeholder="Type to Search" class="ml-[85%]">
+        </div>
+        
+        <table class="table-auto w-full">
             <thead>
-                <tr>
+                <tr class="css-tr">
                     <th>.no</th>
-                    <th>타이틀</th>
-                    <th>제목</th>
+                    <th>곡/앨범</th>
                     <th>아티스트</th>
-                    <th>앨범이름</th>
                     <th>발행날짜</th>
-                    <th>플레이리스트</th>
+                    <th>추가 정보</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(test, i) in tests.data.list" :key= test>
+                <tr v-for="(test, i) in tests.data.list" v-bind:key=i class="itemtr">
                     <td>{{i + 1}}</td>
-                    <td><img :src="tests.data.list[i].album.imgList[0].url" alt="NewListImg" class="w-3/12"></td>
-                    <td>{{tests.data.list[i].name }}</td>
-                    <td>{{tests.data.list[i].artistList[0].name}}</td>
-                    <td>{{tests.data.list[i].album.title }}</td>
-                    <td>{{tests.data.list[i].playTime }}</td>
-                    <td>{{tests.data.list[i].updateDateTime }}</td>
-                </tr>
+                    <td class="info">
+                        <div class="info_wrap">
+                            <div class="info_img"><img :src="tests.data.list[i].album.imgList[0].url" alt=""></div>
+                            <div class="text_area">
+                                <div class="item">
+                                    <div class="titplay name">{{tests.data.list[i].name}}</div>
+                                    <div class="desc name">{{tests.data.list[i].album.title}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="artist">{{tests.data.list[i].artistList[0].name}}</td>
 
+                    <td>{{tests.data.list[i].fileUpdateDateTime}}</td>
+                    <td>
+                            <button @click="handle_toggle(i)">정보보기</button>
+                            <br>
+                    </td>
+                    
+                </tr>
             </tbody>
         </table>
-            <button @click="more">{{count}}더보기</button>
+        <div v-show="toggle">
+            <button @click="more" class="ml-[50%] btn btn-outline btn-accent">더보기</button>
         </div>
+       
 
-    </template>
+        <div v-show="is_show" class="test">
+                <div class="w-full h-full">
+                    <div>
+                        
+                    </div>
+                    <img :src=tests.data.list[this.id].album.imgList[2].url alt="" class="float-left pr-4">
+                    <div class="mb-[13%]">
+                        <li class="text-[32px]">{{tests.data.list[this.id].name}}</li>
+                        <li> {{tests.data.list[this.id].artistList[0].name}}</li>
+                        <br>
+                        <li>
+                            <div class="float-left text-[13px] mr-[21px] ">발매일</div>
+                            <div class="text-[13px]">{{tests.data.list[this.id].fileUpdateDateTime}}</div>
+                        </li>
+                        <li>
+                            <div class="float-left text-[13px] mr-[8px] ">타이틀명</div>
+                            <div class="text-[13px]">{{tests.data.list[this.id].album.title}}</div>
+                        </li>
+                    </div>
+                    <div>
+                        <li>
+                            <div class="float-left">수렵곡</div>
+                            <!-- <div>{{albumlist.data.list}}</div> -->
+                        </li>
+                    </div>
+                    <table class="table-auto w-full modallist">
+                        <thead class="w-full table">
+                            <tr class="css-tr">
+                                <th>.no</th>
+                                <th>곡/앨범</th>
+                            </tr>
+                        </thead>
+                        <tbody class="w-full table">
+                            <tr v-for="(test, i) in songs" v-bind:key=i style="clear: both;" class="itemtr">
+                                <td style="height: 34px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{i + 1}}</td>
+                                <td class="" style="height: 34px;">
+                                    <div class=""  style="height: -1px;">
+                                        <!-- <div class="info_img"><img :src=tests.data.list[i].album.imgList[0].url alt=""></div> -->
+                                        <div class="text_area">
+                                            <div class="item">
+                                                <li>{{songs[i].name}}</li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <div class="">
+                        <img src="../../../img/icon_arrow_left.png" alt="" class="float-left relative top-[355px] right-[90px]"
+                        @click="preevent">
+                        <img :src=tests.data.list[this.id].album.imgList[0].url alt="" class="float-left relative top-[332px] right-[90px]" style="border: solid 5px burlywood;">
+                        <img :src=tests.data.list[this.id+1].album.imgList[0].url alt="" class="float-left relative top-[336px] right-[80px]" @click="nextevent(1)">
+                        <img :src=tests.data.list[this.id+2].album.imgList[0].url alt="" class="float-left relative top-[336px] right-[70px]" @click="nextevent(2)">
+                        <img :src=tests.data.list[this.id+3].album.imgList[0].url alt="" class="float-left relative top-[336px] right-[60px]" @click="nextevent(3)">
+                        <img :src=tests.data.list[this.id+4].album.imgList[0].url alt="" class="float-left relative top-[336px] right-[50px]" @click="nextevent(4)">
+                        <img src="../../../img/icon_arrow_right.png" alt="" class="float-left relative top-[355px] right-[40px]"
+                        @click="nextevent(1)">
+                    </div>
+                     -->
+                </div>
+                
+                <div class="test2">
+                    <button @click="submit" type="button" class="float-left relative top-[32px] right-[22px]">마이 페이지에 저장하기</button>
+                    <button @click="handle_cancel" type="button" class="float-left relative top-[32px] right-[0px]">취소</button>
 
-    <script>
-        import Axios from 'axios';
-        import layout from '../layout/layout.vue'
+                </div>
+        </div>
+    </div>        
+</template>
 
-        export default {
-            components: {
-                layout
-            },
-
-            data() {
-                return {
-                    tests: [],
+<script>
+    import Axios from 'axios';
+    import layout from '../layout/layout.vue'
+    export default {
+        props: {
+                currentUser: {
+                    type: Number,
+                    required: true,
+                    
                 }
             },
-            created() {
+        components: {
+                layout
+                
+            },
+        data() {
+            return {tests: [],
+                    list:[],
+                    is_show: false,
+                    id: '0',
+                    imgList: [{ 'name' : 1, 'name2' : 2} ,{'name' : 2, 'name2' : 2}],
+                    imglistnum : '1',
+                    toggle: true,
+                    songs : [],
+                    }
+        },
+        created() {
                 Axios
                     .get(
                         `https://www.music-flo.com/api/meta/v1/track/KPOP/new?page=1&size=20`
@@ -66,19 +163,127 @@
                         console.log(error)
                     });
             },
-            methods: {
-                more() {
-                    // count 값을 100으로 변경
-                    Axios
-                        .get(
-                            `https://www.music-flo.com/api/meta/v1/track/KPOP/new?page=1&size=100`
-                        )
-                        .then(res => {
-                            this.tests = res.data
-                        })
+        methods : {
+                    more(){
+                        Axios
+                            .get('https://www.music-flo.com/api/meta/v1/track/KPOP/new?page=1&size=100')
+                            .then(res => { this.tests = res.data}
+                            )
+                            this.toggle = !this.toggle
+                    },
+                    handle_toggle: function(i){ 
+                                this.is_show = !this.is_show; // #2, #3
+                                this.id = i
 
+                                Axios(`https://www.music-flo.com/api/meta/v1/album/${this.tests.data.list[i].album.id}/track`)
+                                    .then(res => {this.songs = res.data.data.list})
+                                },
+                                
+                    handle_cancel: function(){
+                                this.is_show = !this.is_show;
+                    },
+                    filter: function(){
+                        var value, name, item, i, itemtr;
+                            value = document.getElementById("value").value.toUpperCase();
+                            item = document.getElementsByClassName("item");
+                            itemtr = document.getElementsByClassName("itemtr");
+                            
+                            for(i=0;i<itemtr.length;i++){
+                                name = item[i].getElementsByClassName("name");
+                                if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+                                itemtr[i].style.display = "table-row";
+                                }else{
+                                itemtr[i].style.display = "none";
+                                // item[i].style.display = "none";
+                                 
+                                }
+                            }
+                    },
+                    submit: function(){ 
+                                this.is_show = !this.is_show; // #2, #3
+                                alert('추가 됐습니다.')
+                                Axios
+                                     .post('/api/chatlists', {
+                                        userid:this.currentUser,
+                                        index:this.id,
+                                        title: this.tests.data.list[this.id].album.title,
+                                        img: this.tests.data.list[this.id].album.imgList[0].url,
+                                        // img: this.imgList,
+                                        img2: this.tests.data.list[this.id].album.imgList[2].url,
+                                        artist: this.tests.data.list[this.id].artistList[0].name,
+                                        albumName: this.tests.data.list[this.id].album.title,
+                                        albumid: this.tests.data.list[this.id].album.id,
+                                        playlist: this.id,
+                                        // update:this.test,
+                                        createDate:'2022-09-09 11:08:37'
+                                     })
+                                },
+                    preevent: function(){
+                        this.id = this.id - 1
+                        if (this.id < 0){
+                            this.id = 0 
+                        }
+                    },
+                    nextevent(i) {
+                        this.id = this.id + i
+                    },
+                
                 }
-            }
-        }
-    </script>
-    <style></style>
+    }
+</script>
+
+<style>
+.css-tr {
+    height: 39px;
+    font-size: 13px;
+    color: #a0a0a0;
+    font-weight: 400;
+    border-top: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+    text-align: center;
+}
+td {
+    position: relative;
+    height: 84px;
+    text-align: center;
+    border-bottom: 1px solid #f6f6f6;
+}
+.info > .info_wrap {
+    position: relative;
+    min-width: 210px;
+    max-width: 520px;
+    height: 60px;
+    padding-right: 28px;
+    padding-left: 80px;
+}
+.info > .info_wrap > .info_img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+}
+.info > .info_wrap > .text_area {
+    max-width: 280px;
+    text-align: left;
+}
+.titplay {
+    font-size: 24px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.info > .info_wrap > .text_are > .desc {
+    color: gray;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.artist {
+    text-align: left;
+    padding-left: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+</style>

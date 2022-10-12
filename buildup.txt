@@ -29,3 +29,11 @@ class="hover:text-[#008d8d]"
 
 
 https://www.music-flo.com/api/meta/v1/album/${i}/track
+
+
+
+디자인수정
+
+로그인 미드웨서 진행
+
+로그인 시 관리자 아니면 admin 계정 못보도록 세팅

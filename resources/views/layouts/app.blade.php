@@ -48,7 +48,7 @@
                         <a href="/MusicList/MainHome" class="hover:text-[#008d8d]">MainHome</a>
                     </div>
                     <div class="pr-3 text-[20px]">
-                    <a href="/admin" class="hover:text-[#008d8d]">test</a>
+                    <a href="/admin" class="hover:text-[#008d8d]">admin</a>
                     </div>    
                     
                     
@@ -56,8 +56,10 @@
        
       
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                  <!-- Right Side Of Navbar -->
+
+                </div>
+                <ul class="navbar-nav ml-auto w-[8%]">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -83,12 +85,10 @@
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
-                                    </form>
                                 </div>
                             </li>
                         @endguest
                     </ul>
-                </div>
             </div>
         </nav>
 
@@ -96,11 +96,5 @@
             @yield('content')
         </main>
     </div>
-    <style>
-        a:hover {
-  text-decoration: none;
-}
-    </style>
-
 </body>
 </html>

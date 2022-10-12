@@ -1,8 +1,6 @@
 <template>
     <div>
-        <div>users계정 확인 / users http://127.0.0.1:8000/api/users</div>
-        <div>issue 정보 확인 / issues http://127.0.0.1:8000/api/issue</div>
-        <div>사용자별 플레이리스트 확인 / chat_list http://127.0.0.1:8000/api/chatlists/all</div>
+
         
 
 
@@ -89,7 +87,7 @@
         created() {
             Axios
                 .get(
-                     'http://127.0.0.1:8000/api/users'
+                     '/api/users'
                 )
                 .then(res => {
                     this.userlist = res.data
@@ -100,7 +98,7 @@
 
             Axios
                 .get(
-                        'http://127.0.0.1:8000/api/issue'
+                        '/api/issue'
                 )
                 .then(res => {
                     this.issuelist = res.data
@@ -110,7 +108,7 @@
                 });
             Axios
                 .get(
-                        'http://127.0.0.1:8000/api/chatlists/all'
+                        '/api/chatlists/all'
                 )
                 .then(res => {
                     this.chatlist = res.data

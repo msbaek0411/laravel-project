@@ -2,10 +2,10 @@
 
     <div class="">
         
-        <a class="btn btn-active btn-accent color-white" href="/MusicList/top">TOP100</a>
+        <!-- <a class="btn btn-active btn-accent color-white" href="/MusicList/top">TOP100</a>
         <a class="btn btn-outline btn-accent" href="/MusicList/new">NEW</a>
         <a class="btn btn-outline btn-accent" href="/MusicList/MainHome">Mainhome</a>
-        <a class="btn btn-outline btn-accent">test</a>
+        <a class="btn btn-outline btn-accent" href="/admin">admin</a> -->
 
         <h1 class="text-4xl leading-loose">Top 100 playlist</h1>
         <br>
@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(test, i) in tests.data.trackList" v-bind:key=i class="itemtr">
+                <tr v-for="(test, i) in tests.data.trackList" :key=i class="itemtr">
                     <td>{{i + 1}}</td>
                     <td class="info">
                         <div class="info_wrap">
@@ -79,18 +79,30 @@
                             <!-- <div>{{albumlist.data.list}}</div> -->
                         </li>
                     </div>
-                    <!-- <div class="">
-                        <img src="../../../img/icon_arrow_left.png" alt="" class="float-left relative top-[355px] right-[90px]"
-                        @click="preevent">
-                        <img :src=tests.data.trackList[this.id].album.imgList[0].url alt="" class="float-left relative top-[332px] right-[90px]" style="border: solid 5px burlywood;">
-                        <img :src=tests.data.trackList[this.id+1].album.imgList[0].url alt="" class="float-left relative top-[336px] right-[80px]" @click="nextevent(1)">
-                        <img :src=tests.data.trackList[this.id+2].album.imgList[0].url alt="" class="float-left relative top-[336px] right-[70px]" @click="nextevent(2)">
-                        <img :src=tests.data.trackList[this.id+3].album.imgList[0].url alt="" class="float-left relative top-[336px] right-[60px]" @click="nextevent(3)">
-                        <img :src=tests.data.trackList[this.id+4].album.imgList[0].url alt="" class="float-left relative top-[336px] right-[50px]" @click="nextevent(4)">
-                        <img src="../../../img/icon_arrow_right.png" alt="" class="float-left relative top-[355px] right-[40px]"
-                        @click="nextevent(1)">
-                    </div>
-                     -->
+                    <table class="table-auto w-full modallist">
+                        <thead class="w-full table">
+                            <tr class="css-tr">
+                                <th>.no</th>
+                                <th>곡/앨범</th>
+                            </tr>
+                        </thead>
+                        <tbody class="w-full table">
+                            <tr v-for="(test, i) in songs" v-bind:key=i style="clear: both;" class="itemtr">
+                                <td style="height: 34px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{i + 1}}</td>
+                                <td class="" style="height: 34px;">
+                                    <div class=""  style="height: -1px;">
+                                        <!-- <div class="info_img"><img :src=tests.data.trackList[i].album.imgList[0].url alt=""></div> -->
+                                        <div class="text_area">
+                                            <div class="item">
+                                                <li>{{songs[i].name}}</li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                 </div>
                 
                 <div class="test2">
@@ -105,7 +117,6 @@
 <script>
     import Axios from 'axios';
     import layout from '../layout/layout.vue'
-
     export default {
         props: {
                 currentUser: {
@@ -126,9 +137,7 @@
                     imgList: [{ 'name' : 1, 'name2' : 2} ,{'name' : 2, 'name2' : 2}],
                     imglistnum : '1',
                     toggle: true,
-                    albumid: '409131223',
-                    albumlist : [],
-                    test3209:[]
+                    songs : [],
                     }
         },
         created() {
@@ -138,17 +147,6 @@
                 )
                 .then(res => {
                     this.tests = res.data
-                })
-                .catch(error => {
-                    console.log(error)
-                });
-
-            Axios
-                .get(
-                        `https://www.music-flo.com/api/meta/v1/album/${this.albumid}/track`
-                )
-                .then(res => {
-                    this.test3209 = res.data
                 })
                 .catch(error => {
                     console.log(error)
@@ -165,9 +163,9 @@
                     handle_toggle: function(i){ 
                                 this.is_show = !this.is_show; // #2, #3
                                 this.id = i
-                                this.albumid = this.tests.data.trackList[i].album.id
-                                Axios.get(`https://www.music-flo.com/api/meta/v1/album/${this.albumid}/track`)
-                                    .then(res => {this.albumlist = res.data})
+
+                                Axios(`https://www.music-flo.com/api/meta/v1/album/${this.tests.data.trackList[i].album.id}/track`)
+                                    .then(res => {this.songs = res.data.data.list})
                                 },
                                 
                     handle_cancel: function(){
@@ -188,10 +186,8 @@
                                 // item[i].style.display = "none";
                                  
                                 }
-
                             }
                     },
-
                     submit: function(){ 
                                 this.is_show = !this.is_show; // #2, #3
                                 alert('추가 됐습니다.')
@@ -205,10 +201,15 @@
                                         img2: this.tests.data.trackList[this.id].album.imgList[2].url,
                                         artist: this.tests.data.trackList[this.id].artistList[0].name,
                                         albumName: this.tests.data.trackList[this.id].album.title,
+                                        albumid: this.tests.data.trackList[this.id].album.id,
                                         playlist: this.id,
                                         // update:this.test,
                                         createDate:'2022-09-09 11:08:37'
                                      })
+                                     .catch(error => {
+                                        console.log(error);
+                                     })
+                                     
                                 },
                     preevent: function(){
                         this.id = this.id - 1
@@ -234,15 +235,12 @@
     border-bottom: 1px solid #ebebeb;
     text-align: center;
 }
-
 td {
     position: relative;
     height: 84px;
     text-align: center;
     border-bottom: 1px solid #f6f6f6;
 }
-
-
 .info > .info_wrap {
     position: relative;
     min-width: 210px;
@@ -251,9 +249,6 @@ td {
     padding-right: 28px;
     padding-left: 80px;
 }
-
-
-
 .info > .info_wrap > .info_img {
     position: absolute;
     top: 0;
@@ -261,26 +256,22 @@ td {
     width: 60px;
     height: 60px;
 }
-
 .info > .info_wrap > .text_area {
     max-width: 280px;
     text-align: left;
 }
-
 .titplay {
     font-size: 24px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
-
 .info > .info_wrap > .text_are > .desc {
     color: gray;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
-
 .artist {
     text-align: left;
     padding-left: 20px;
@@ -288,7 +279,5 @@ td {
     white-space: nowrap;
     overflow: hidden;
 }
-
-
 
 </style>

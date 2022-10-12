@@ -34,6 +34,7 @@ class ChatListController extends Controller
             'artist'=>  'required',
             'playlist'=>  'required',
             'createDate'=> 'required',
+            'albumid'=> 'required',
             // 'update'=>'required',
         ]);
 

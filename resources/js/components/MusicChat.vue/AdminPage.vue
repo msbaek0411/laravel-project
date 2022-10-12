@@ -1,13 +1,10 @@
 <template>
     <div>
-        <div>users계정 확인 / users http://127.0.0.1:8000/api/users</div>
-        <div>issue 정보 확인 / issues http://127.0.0.1:8000/api/issue</div>
-        <div>사용자별 플레이리스트 확인 / chat_list http://127.0.0.1:8000/api/chatlists/all</div>
         
 
 
 <!-- userlist -->
-        <section class="antialiased bg-gray-100 text-gray-600  px-4" x-data="app">
+        <section class="antialiased bg-gray-100 text-gray-600  px-4 p-[4%]" x-data="app">
             <div class="flex flex-col justify-center h-full">
                 <div class="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
                     <header class="px-5 py-4 border-b border-gray-100">
@@ -59,7 +56,7 @@
                                         {{userlist.users[i].updated_at}}
                                     </td>
                                     <td class="p-2">
-                                        <a class="float-left" :href="'http://127.0.0.1:8000/admin/user/'+userlist.users[i].id+'/edit'">수정</a>
+                                        <a class="float-left" :href="'/admin/user/'+userlist.users[i].id+'/edit'">수정</a>
                                         <div @click="deleteList(userlist.users[i].id)">삭제</div>
                                     </td>
                                 </tr>
@@ -70,7 +67,7 @@
             </div>
         </section>
 <!-- issuelist -->
-        <section class="antialiased bg-gray-100 text-gray-600 px-4" x-data="app">
+        <section class="antialiased bg-gray-100 text-gray-600 px-4 p-[4%]" x-data="app">
             <div class="flex flex-col justify-center h-full">
                 <div class="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
                     <header class="px-5 py-4 border-b border-gray-100">
@@ -130,7 +127,7 @@
                                         {{issuelist.issue[i].created_at}}
                                     </td>
                                     <td class="p-2">
-                                        <a class="float-left" :href="'http://127.0.0.1:8000/admin/issue/'+issuelist.issue[i].id+'/edit'">수정</a>
+                                        <a class="float-left" :href="'/admin/issue/'+issuelist.issue[i].id+'/edit'">수정</a>
                                         <div @click="deleteListissue(issuelist.issue[i].id)">삭제</div>
                                     </td>
                                     {{issuelist.issue[0].id}}
@@ -142,7 +139,7 @@
             </div>
         </section>
 <!-- chatlist -->
-        <section class="antialiased bg-gray-100 text-gray-600 px-4" x-data="app">
+        <section class="antialiased bg-gray-100 text-gray-600 px-4 p-[4%]" x-data="app">
             <div class="flex flex-col justify-center h-full">
                 <div class="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
                     <header class="px-5 py-4 border-b border-gray-100">
@@ -219,6 +216,14 @@
     import layout from '../layout/layout.vue'
 
     export default {
+        props: {
+                currentUser: {
+                    type: Number,
+                    required: true,
+                    
+                }
+            },
+        
         components: {
                 layout
                 
@@ -234,7 +239,7 @@
         created() {
             Axios
                 .get(
-                     'http://127.0.0.1:8000/api/users'
+                     '/api/users'
                 )
                 .then(res => {
                     this.userlist = res.data
@@ -245,7 +250,7 @@
 
             Axios
                 .get(
-                        'http://127.0.0.1:8000/api/issue'
+                        '/api/issue'
                 )
                 .then(res => {
                     this.issuelist = res.data
@@ -255,7 +260,7 @@
                 });
             Axios
                 .get(
-                        'http://127.0.0.1:8000/api/chatlists/all'
+                        '/api/chatlists/all'
                 )
                 .then(res => {
                     this.chatlist = res.data
@@ -267,13 +272,13 @@
         methods:{
                 deleteList(i) {
                     Axios
-                        .delete(`http://127.0.0.1:8000/api/admin/user/${i}`) 
+                        .delete(`/api/admin/user/${i}`) 
                         .then(res => { window.location.reload(); });
 
                             },
                 deleteListissue(i) {
                     Axios
-                        .delete(`http://127.0.0.1:8000/api/admin/issue/${i}`) 
+                        .delete(`/api/admin/issue/${i}`) 
                         .then(res => { window.location.reload(); });
                 }
                 }

@@ -1,80 +1,103 @@
 <template>
 
     <div class="h-full">
-        <a class="btn btn-outline btn-accent" href="/MusicList/top">TOP100</a>
+        <!-- <a class="btn btn-outline btn-accent" href="/MusicList/top">TOP100</a>
         <a class="btn btn-outline btn-accent" href="/MusicList/new">NEW</a>
         <a class="btn btn-active btn-accent" href="/MusicList/MainHome">Mainhome</a>
-        <a class="btn btn-outline btn-accent">test</a>
+        <a class="btn btn-outline btn-accent" href="/admin">admin</a> -->
         <h1 class="text-4xl leading-loose">나의 playlist</h1>
 
+        <div>
+            <input v-on:keyup="filter" type="text" id="value" placeholder="Type to Search" class="ml-[85%]">
+        </div>
+            <div v-if="Main.ChatList[1] == null ">
+                <div>
+                로그인 부탁드립니다.
+                </div>
+            </div>
+            <div v-else>
+                <table class="table-auto w-full">
+                <thead>
+                    <tr class="css-tr">
+                        <th>.no</th>
+                        <th>곡/앨범</th>
+                        <th>아티스트</th>
+                        <th>발행날짜</th>
+                        <th>추가 정보</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(test, i) in Main.ChatList" v-bind:key=i class="itemtr">
+                        <td>{{i + 1}}</td>
+                        <td class="info">
+                            <div class="info_wrap">
+                                <div class="info_img"><img :src=Main.ChatList[i].img alt=""></div>
+                                <div class="text_area">
+                                    <div class="item">
+                                        <div class="titplay name">{{Main.ChatList[i].title}}</div>
+                                        <div class="desc name">{{Main.ChatList[i].artist}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="artist">{{Main.ChatList[i].artist}}</td>
 
-        <div v-if="Main.ChatList[1] == null ">
-            <div>
-                정보없ㅇ므 <a href="http://127.0.0.1:8000/MusicList/top">탑</a>이나<a href="http://127.0.0.1:8000/MusicList/new">뉴</a>에 가서 데이터 쌓고 돌아와라.
+                        <td>{{Main.ChatList[i].createDate}}</td>
+                        <td>
+                                <button @click="handle_toggle(i)">정보보기</button>
+                                <div @click="deleteList(Main.ChatList[i].id)">삭제</div>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- Modal  -->
+            <div v-show="is_show" class="test">
+            <div class="w-full h-full">
+                {{this.i}}
+                <img :src=Main.ChatList[this.id].img alt="" class="float-left pr-4 pb-[33px] w-[22%]" >
+                <div  class="mb-[13%]">
+                    <li class="text-[32px]">{{Main.ChatList[this.id].title}}</li>
+                    <li>{{Main.ChatList[this.id].artist}}</li>
+                    <br>
+                    <li><div class="float-left text-[13px] mr-[8px] ">타이틀명</div>
+                        <div class="text-[13px]">{{Main.ChatList[this.id].albumName}}</div>
+                    </li>
+                    
+                </div>
+
+                <table class="table-auto w-full modallist">
+                    <thead class="w-full table">
+                        <tr class="css-tr">
+                            <th>.no</th>
+                            <th>곡/앨범</th>
+                        </tr>
+                    </thead>
+                    <tbody class="w-full table">
+                        <tr v-for="(test, i) in songs" v-bind:key=i style="clear: both;" class="itemtr">
+                            <td style="height: 34px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{i + 1}}</td>
+                            <td class="" style="height: 34px;">
+                                <div class=""  style="height: -1px;">
+                                    <!-- <div class="info_img"><img :src=tests.data.trackList[i].album.imgList[0].url alt=""></div> -->
+                                    <div class="text_area">
+                                        <div class="item">
+                                            <li>{{songs[i].name}}</li>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>   
+            </div>
+            <div class="test2">
+                <button @click="handle_cancel()" type="button" class="float-left relative top-[32px] right-[0px]">취소</button>
+
             </div>
         </div>
-        <div v-else>
-            <button @click="alldatas()">전체데이타</button>
-            <table class="table-auto">
-            <thead>
-                <tr>
-                    <th>.no</th>
-                    <th>타이틀</th>
-                    <th>제목</th>
-                    <th>아티스트</th>
-                    <th>앨범이름</th>
-                    <th>발행날짜</th>
-                    <th>플레이리스트</th>
-                    <th>더보기</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(test, i) in Main.ChatList" :key= i>
-                    <td @click="[handle_toggle(),countup(i)]">{{i + 1}}</td>
-                    <td @click="[handle_toggle(),countup(i)]"><img :src="Main.ChatList[i].img" alt="NewListImg"></td>
-                    <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].title}}</td>
-                    <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].artist}}</td>
-                    <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].albumName}}</td>
-                    <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].createDate}}</td>
-                    <td @click="[handle_toggle(),countup(i)]">{{Main.ChatList[i].playlist}}</td>
-                    <td @click="deleteList(Main.ChatList[i].id)">삭제</td>
-                </tr>
-            </tbody>
-        </table>
-            {{Main.ChatList[0].id}}
-            
-    <!-- Modal  -->
-    <div v-show="is_show" class="test">
-                <div class="w-full h-full">
-                    <div>
-                        <img :src="Main.ChatList[this.id].img" alt="NewListImg" class="float-left pr-4">
-                    </div>
-                    <div>
-                    <li>{{Main.ChatList[this.id].title}}</li>
-                    <li>{{Main.ChatList[this.id].artist}}</li>
-                    <li>{{Main.ChatList[this.id].albumName}}</li>
-                    <li>{{Main.ChatList[this.id].createDate}}</li>
-                    <li>{{Main.ChatList[this.id].playlist}}</li>
-                    </div>
-                    <div class="">
-                        <img src="../../../img/icon_arrow_left.png" alt="" class="float-left relative top-[355px] right-[90px]">
-                        <img :src=Main.ChatList[this.id].img alt="" class="float-left relative top-[332px] right-[90px]" style="border: solid 5px burlywood;">
-                        <img :src=Main.ChatList[this.id].img alt="" class="float-left relative top-[336px] right-[80px]">
-                        <img :src=Main.ChatList[this.id].img alt="" class="float-left relative top-[336px] right-[70px]">
-                        <img :src=Main.ChatList[this.id].img alt="" class="float-left relative top-[336px] right-[60px]">
-                        <img :src=Main.ChatList[this.id].img alt="" class="float-left relative top-[336px] right-[50px]">
-                        <img src="../../../img/icon_arrow_right.png" alt="" class="float-left relative top-[355px] right-[40px]">
-                    </div>
-
-                </div>
-        <div class="test2">
-            <button @click="handle_toggle" type="button">취소</button>
-            <button @click="handle_toggle" type="button">확인</button>
         </div>
-
     </div>
-    </div>
-        </div>
 
         
         
@@ -82,9 +105,7 @@
 
     <script>
         import Axios from 'axios';
-        import layout from '../layout/layout.vue'
-        import Vue from 'vue';
-        import VueCarousel from 'vue-carousel'
+        import layout from '../layout/layout.vue';
 
         export default {
             props: {
@@ -104,12 +125,14 @@
                         Main: [],
                         is_show: false ,
                         id: '1',
-                        alldata: []
+                        alldata: [],
+                        songs : [],
+                        i: '',
                         }
             },
             created() {
                 Axios
-                    .get('http://127.0.0.1:8000/api/chatlists', {
+                    .get('/api/chatlists', {
                         params: {
                         userid: this.currentUser,
                     }
@@ -119,24 +142,49 @@
                     
             },
             methods:{
-                        handle_toggle: function(){ 
-                        this.is_show = !this.is_show; // #2, #3
+                        handle_toggle(i) {
+                            this.is_show = !this.is_show; // #2, #3
+                            this.id = i
+
+                            Axios
+                                .get(`https://www.music-flo.com/api/meta/v1/album/${this.Main.ChatList[this.id].albumid}/track`)
+                                .then(res => {this.songs = res.data.data.list})
+                        },
+                        handle_cancel() {
+                            this.is_show = !this.is_show; // #2, #3
                         },
                         countup(i) {
                             this.id  =  i
                         },
                         deleteList(i) {
                             alert('삭제 됐습니다.')
-                            Axios.delete(`http://127.0.0.1:8000/api/chatlists/${i}`)
+                            Axios.delete(`/api/chatlists/${i}`)
                             .then(res => {
                                 window.location.reload();
                             });
                         },
                         alldatas() {
-                            Axios.get('http://127.0.0.1:8000/api/chatlists/all')
+                            Axios.get('/api/chatlists/all')
                             .then(res=>{this.alldata = res.data})
                             .then(this.Main = this.alldata)
-                        }
+                        },
+                        filter: function(){
+                        var value, name, item, i, itemtr;
+                            value = document.getElementById("value").value.toUpperCase();
+                            item = document.getElementsByClassName("item");
+                            itemtr = document.getElementsByClassName("itemtr");
+                            
+                            for(i=0;i<itemtr.length;i++){
+                                name = item[i].getElementsByClassName("name");
+                                if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+                                itemtr[i].style.display = "table-row";
+                                }else{
+                                itemtr[i].style.display = "none";
+                                // item[i].style.display = "none";
+                                 
+                                }
+                            }
+                    },
                     }
         }
         

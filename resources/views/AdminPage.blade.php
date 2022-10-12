@@ -12,15 +12,20 @@
         <!-- Styles -->
     </head>
     <body>
-
     @extends('layouts.app')
 
 @section('content')
 
-<div class="container">
-    <Chat8/>
-</div>
+
+
+
+@if(auth()->id() == 1 or auth()->id() == 17 )
+    <div class="container"><Chat8 :current-user="{{ auth()->id() }}"></Chat8></div>
+    @else
+    <div class="container"><Chat6></Chat6></div>
+    @endif
 @endsection
+
 
     </body>
 </html>

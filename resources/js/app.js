@@ -33,7 +33,6 @@ Vue.component('Chat7', require('./components/MusicChat.vue/MainPageC').default);
 
 Vue.component('Chat8', require('./components/MusicChat.vue/AdminPage').default);
 
-Vue.component('Chat9', require('./components/MusicChat.vue/AdminPageDetail').default);
 
 
 

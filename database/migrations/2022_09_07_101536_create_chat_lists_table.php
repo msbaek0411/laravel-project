@@ -22,6 +22,7 @@ class CreateChatListsTable extends Migration
             $table->string('title');
             $table->string('artist');
             $table->string('albumName');
+            $table->string('albumid');
             $table->date('createDate');
             $table->time('playlist');
             $table->timestamps();
