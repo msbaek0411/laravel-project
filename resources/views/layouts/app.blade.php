@@ -45,7 +45,7 @@
                         <a href="/MusicList/new" class="hover:text-[#008d8d]">new</a>
                     </div>
                     <div class="pr-3 text-[20px]">
-                        <a href="/MusicList/MainHome" class="hover:text-[#008d8d]">MainHome</a>
+                        <a href="/MusicList/Mainhome" class="hover:text-[#008d8d]">MainHome</a>
                     </div>
                     <div class="pr-3 text-[20px]">
                     <a href="/admin" class="hover:text-[#008d8d]">admin</a>

@@ -2752,7 +2752,7 @@ var render = function render() {
     staticClass: "h-full"
   }, [_c("h1", {
     staticClass: "text-4xl leading-loose"
-  }, [_vm._v("나의 playlist")]), _vm._v(" "), _c("div", [_c("input", {
+  }, [_vm._v(" playlist")]), _vm._v(" "), _c("div", [_c("input", {
     staticClass: "ml-[85%]",
     attrs: {
       type: "text",
@@ -3211,7 +3211,7 @@ var render = function render() {
         }
       }
     }, [_c("img", {
-      staticClass: "hover:grow hover:shadow-lg rounded-[27px]",
+      staticClass: "hover:grow hover:shadow-lg rounded-[27px] w-[100%]",
       attrs: {
         src: _vm.NewList.data.list[i].album.imgList[2].url
       }
@@ -3433,7 +3433,7 @@ var staticRenderFns = [function () {
   }, [_c("img", {
     staticClass: "w-full",
     attrs: {
-      src: "/storage/test2.png",
+      src: __webpack_require__(/*! ../../../../public/images/test2.png */ "./public/images/test2.png"),
       alt: ""
     }
   })]);
@@ -52293,6 +52293,17 @@ module.exports = "/images/issue4.png?e9737615796337dd929d4a5be0e305e3";
 /***/ (function(module, exports) {
 
 module.exports = "/images/issue5.png?c36ebdc4b16966f75db1f588885b64f4";
+
+/***/ }),
+
+/***/ "./public/images/test2.png":
+/*!*********************************!*\
+  !*** ./public/images/test2.png ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/test2.png?78d3d8651cf48c546322b1a501ee14ce";
 
 /***/ }),
 

@@ -40,8 +40,8 @@ Route::put('/admin/issue/{id}','AdminIssueController@update');
 // Route::delete('/admin/user/{id}','AdminController@destory');
 
 
-Route::get('/MusicList/MainHome', function () {
-    return view('MainHome');
+Route::get('/MusicList/Mainhome', function () {
+    return view('Mainhome');
 });
 
 

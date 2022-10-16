@@ -5,7 +5,7 @@
         <a class="btn btn-outline btn-accent" href="/MusicList/new">NEW</a>
         <a class="btn btn-active btn-accent" href="/MusicList/MainHome">Mainhome</a>
         <a class="btn btn-outline btn-accent" href="/admin">admin</a> -->
-        <h1 class="text-4xl leading-loose">나의 playlist</h1>
+        <h1 class="text-4xl leading-loose"> playlist</h1>
 
         <div>
             <input v-on:keyup="filter" type="text" id="value" placeholder="Type to Search" class="ml-[85%]">

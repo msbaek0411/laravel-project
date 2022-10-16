@@ -156,7 +156,7 @@
 
                     <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col" v-for="(test, i) in TopList.data.trackList" v-bind:key=i>
                         <div @click="handle_toggleNew(i)">
-                            <img class="hover:grow hover:shadow-lg rounded-[27px]" :src="NewList.data.list[i].album.imgList[2].url">
+                            <img class="hover:grow hover:shadow-lg rounded-[27px] w-[100%]" :src="NewList.data.list[i].album.imgList[2].url">
                             <p class="m-0 text-ellipsis whitespace-nowrap overflow-hidden text-[18px] pt-[4%]">{{NewList.data.list[i].name }}</p>
                             <p class="text-ellipsis whitespace-nowrap overflow-hidden text-[13px] text-[lightslategray]">{{NewList.data.list[i].artistList[0].name}}</p>
                         </div>
